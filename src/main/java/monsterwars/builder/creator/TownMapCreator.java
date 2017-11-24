@@ -13,7 +13,8 @@ import java.util.Set;
  */
 public class TownMapCreator {
 
-    private static final String SPLIT_REGEX_PATTERN = "\\s+";
+    private static final String SPACE_SEPARATOR = "\\s+";
+    private static final String EQUALS_SEPARATOR = "=";
 
     private final RawMapFactory rawMapFactory;
 
@@ -21,30 +22,45 @@ public class TownMapCreator {
         this.rawMapFactory = rawMapFactory;
     }
 
-    public Map<Town, Map<Directions, Town>> create(final Set<String> rawData) {
+    public Map<Town, Map<Directions, Town>> createFrom(final Set<String> rawData) {
         Map<Town, Map<Directions, Town>> map = rawMapFactory.create();
         rawData.forEach(line -> fillMap(map, line));
         return map;
     }
 
     private void fillMap(final Map<Town, Map<Directions, Town>> map, final String line) {
-        Town currentTown = createNewTown(line);
-        map.put(currentTown, new HashMap<>());
-        String[] tokens = line.split("\\s");
+        String[] tokens = splitLineToTokens(line, SPACE_SEPARATOR);
+        Town currentTown = createNewTown(tokens[0]);
+        placeCurrentTownToMap(map, currentTown);
         for (int i = 1; i < tokens.length; i++) {
-            String townLink = tokens[i];
-            String direction = townLink.split("=")[0];
-            String townToLink = townLink.split("=")[1];
-            Town townToLinkInstance = new Town(townToLink);
-            map.get(currentTown).put(Directions.valueOf(direction.toUpperCase()), townToLinkInstance);
+            String direction = getDirectionFromCurrentToken(tokens[i]);
+            String nameOfTownToLink = getTownNameFromCurrentToken(tokens[i]);
+            Town townToLink = new Town(nameOfTownToLink);
+            map.get(currentTown).put(getTownDirection(direction), townToLink);
         }
     }
 
-    private Town createNewTown(final String line) {
-        return new Town(getTownName(line));
+    private String[] splitLineToTokens(final String line, final String regex) {
+        return line.split(regex);
     }
 
-    private String getTownName(final String line) {
-        return line.split(SPLIT_REGEX_PATTERN)[0];
+    private Town createNewTown(final String name) {
+        return new Town(name);
+    }
+
+    private void placeCurrentTownToMap(final Map<Town, Map<Directions, Town>> map, final Town currentTown) {
+        map.put(currentTown, new HashMap<>());
+    }
+
+    private String getDirectionFromCurrentToken(final String token) {
+        return splitLineToTokens(token, EQUALS_SEPARATOR)[0];
+    }
+
+    private String getTownNameFromCurrentToken(final String token) {
+        return splitLineToTokens(token, EQUALS_SEPARATOR)[1];
+    }
+
+    private Directions getTownDirection(final String direction) {
+        return Directions.valueOf(direction.toUpperCase());
     }
 }

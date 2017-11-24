@@ -26,7 +26,7 @@ public class TownMapCreatorTest {
         Town b = new Town("B");
         Town c = new Town("C");
         //WHEN
-        Map<Town, Map<Directions, Town>> map = underTest.create(rawMap);
+        Map<Town, Map<Directions, Town>> map = underTest.createFrom(rawMap);
         // THEN
         assertEquals(map.get(a).get(Directions.NORTH).getName(), "B");
         assertEquals(map.get(b).get(Directions.SOUTH).getName(), "A");
