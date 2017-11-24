@@ -38,7 +38,7 @@ public class WorldMapFileReader {
         return new DataInputStream(getResourceAsStream(fileName));
     }
 
-    private void processLine(final Set<String> result, String line) {
+    private void processLine(final Set<String> result, final String line) {
         if (!line.isEmpty()) {
             result.add(line.trim());
         }
