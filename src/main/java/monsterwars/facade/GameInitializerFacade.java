@@ -2,7 +2,7 @@ package monsterwars.facade;
 
 import monsterwars.builder.WorldMapBuilder;
 import monsterwars.builder.creator.TownDataMapCreator;
-import monsterwars.builder.filler.TownDataDirectionsFiller;
+import monsterwars.builder.factory.RawMapFactory;
 import monsterwars.data.Directions;
 import monsterwars.data.Town;
 import monsterwars.data.WorldMap;
@@ -38,12 +38,12 @@ public class GameInitializerFacade {
         System.out.println("" + town.getName() + " " + getName(worldMap, town, Directions.NORTH) + " " + getName(worldMap, town, Directions.EAST) + " " + getName(worldMap, town, Directions.WEST) + " " + getName(worldMap, town, Directions.SOUTH));
     }
 
-    private String getName(WorldMap worldMap, Town town, Directions direction) {
+    private String getName(final WorldMap worldMap, final Town town, final Directions direction) {
         return Optional.ofNullable(worldMap.getMap().get(town).get(direction)).orElse(new Town("")).getName();
     }
 
     private WorldMap buildWorldMap(final Set<String> rawData) {
-        WorldMapBuilder worldMapBuilder = new WorldMapBuilder(new TownDataMapCreator(), new TownDataDirectionsFiller());
+        WorldMapBuilder worldMapBuilder = new WorldMapBuilder(new TownDataMapCreator(new RawMapFactory()));
         return worldMapBuilder.build(rawData);
     }
 

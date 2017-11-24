@@ -1,12 +1,12 @@
 package monsterwars.builder.creator;
 
+import monsterwars.builder.factory.RawMapFactory;
 import monsterwars.data.Directions;
 import monsterwars.data.Town;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 /**
  * Converts ras lines of Strings to {@link monsterwars.data.WorldMap} content.
@@ -14,12 +14,31 @@ import java.util.TreeMap;
 public class TownDataMapCreator {
 
     private static final String SPLIT_REGEX_PATTERN = "\\s+";
-    private static final String STRING_SPLIT_ERROR_MESSAGE = "The following line could not be processed during world map creation: ";
 
-    public Map<Town, Map<Directions, Town >> create(final Set<String> rawData) {
-        TreeMap<Town, Map<Directions, Town>> map = new TreeMap<>();
-        rawData.forEach(line -> map.put(createNewTown(line), new HashMap<>()));
+    private final RawMapFactory rawMapFactory;
+
+    public TownDataMapCreator(RawMapFactory rawMapFactory) {
+        this.rawMapFactory = rawMapFactory;
+    }
+
+    public Map<Town, Map<Directions, Town>> create(final Set<String> rawData) {
+        Map<Town, Map<Directions, Town>> map = rawMapFactory.create();
+        rawData.forEach(line -> fillMap(map, line));
         return map;
+    }
+
+    private Map<Directions, Town> fillMap(Map<Town, Map<Directions, Town>> map, String line) {
+        Town currentTown = createNewTown(line);
+        Map m = map.put(currentTown, new HashMap<>());
+        String[] tokens = line.split("\\s");
+        for (int i = 1; i < tokens.length; i++) {
+            String townLink = tokens[i];
+            String direction = townLink.split("=")[0];
+            String townToLink = townLink.split("=")[1];
+            Town townToLinkInstance = new Town(townToLink);
+            map.get(currentTown).put(Directions.valueOf(direction.toUpperCase()), townToLinkInstance);
+        }
+        return m;
     }
 
     private Town createNewTown(final String line) {
@@ -27,10 +46,6 @@ public class TownDataMapCreator {
     }
 
     private String getTownName(final String line) {
-        String[] result = line.split(SPLIT_REGEX_PATTERN);
-        if (result.length == 0) {
-            throw new IllegalArgumentException(STRING_SPLIT_ERROR_MESSAGE + line);
-        }
-        return result[0];
+        return line.split(SPLIT_REGEX_PATTERN)[0];
     }
 }
