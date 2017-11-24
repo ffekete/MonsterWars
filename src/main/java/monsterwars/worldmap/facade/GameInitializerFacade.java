@@ -1,13 +1,13 @@
-package monsterwars.facade;
+package monsterwars.worldmap.facade;
 
-import monsterwars.builder.WorldMapBuilder;
-import monsterwars.builder.creator.TownMapCreator;
-import monsterwars.builder.factory.RawMapFactory;
-import monsterwars.data.Directions;
-import monsterwars.data.Town;
-import monsterwars.data.WorldMap;
 import monsterwars.main.Main;
-import monsterwars.reader.WorldMapFileReader;
+import monsterwars.worldmap.WorldMap;
+import monsterwars.worldmap.WorldMapBuilder;
+import monsterwars.worldmap.creator.TownMapCreator;
+import monsterwars.worldmap.data.Directions;
+import monsterwars.worldmap.data.Town;
+import monsterwars.worldmap.factory.RawMapFactory;
+import monsterwars.worldmap.reader.WorldMapFileReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * Helps initializing a {@link monsterwars.data.WorldMap}.
+ * Helps initializing a {@link WorldMap}.
  */
 public class GameInitializerFacade {
 

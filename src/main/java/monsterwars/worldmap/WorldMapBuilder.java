@@ -1,7 +1,6 @@
-package monsterwars.builder;
+package monsterwars.worldmap;
 
-import monsterwars.builder.creator.TownMapCreator;
-import monsterwars.data.WorldMap;
+import monsterwars.worldmap.creator.TownMapCreator;
 
 import java.util.Set;
 

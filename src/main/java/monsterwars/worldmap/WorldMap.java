@@ -1,4 +1,7 @@
-package monsterwars.data;
+package monsterwars.worldmap;
+
+import monsterwars.worldmap.data.Directions;
+import monsterwars.worldmap.data.Town;
 
 import java.util.Map;
 

@@ -1,8 +1,8 @@
-package monsterwars.builder.creator;
+package monsterwars.worldmap.creator;
 
-import monsterwars.builder.factory.RawMapFactory;
-import monsterwars.data.Directions;
-import monsterwars.data.Town;
+import monsterwars.worldmap.factory.RawMapFactory;
+import monsterwars.worldmap.data.Directions;
+import monsterwars.worldmap.data.Town;
 
 import java.util.HashMap;
 import java.util.Map;

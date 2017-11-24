@@ -1,4 +1,4 @@
-package monsterwars.reader;
+package monsterwars.worldmap.reader;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;

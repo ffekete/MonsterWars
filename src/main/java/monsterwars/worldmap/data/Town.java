@@ -1,9 +1,9 @@
-package monsterwars.data;
+package monsterwars.worldmap.data;
 
 /**
  * Pojo representing a single town.
  */
-public final class Town implements Comparable<Town>{
+public final class Town implements Comparable<Town> {
 
     private final String name;
 

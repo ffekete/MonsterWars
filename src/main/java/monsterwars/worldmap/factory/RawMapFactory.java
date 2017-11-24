@@ -1,7 +1,7 @@
-package monsterwars.builder.factory;
+package monsterwars.worldmap.factory;
 
-import monsterwars.data.Directions;
-import monsterwars.data.Town;
+import monsterwars.worldmap.data.Directions;
+import monsterwars.worldmap.data.Town;
 
 import java.util.Map;
 import java.util.TreeMap;

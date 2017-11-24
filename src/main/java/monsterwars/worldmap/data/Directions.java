@@ -1,4 +1,4 @@
-package monsterwars.data;
+package monsterwars.worldmap.data;
 
 public enum Directions {
     NORTH("north"),

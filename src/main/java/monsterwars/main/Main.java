@@ -1,6 +1,6 @@
 package monsterwars.main;
 
-import monsterwars.facade.GameInitializerFacade;
+import monsterwars.worldmap.facade.GameInitializerFacade;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
