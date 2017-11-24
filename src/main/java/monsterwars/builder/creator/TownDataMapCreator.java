@@ -1,6 +1,5 @@
 package monsterwars.builder.creator;
 
-import monsterwars.data.DirectionNames;
 import monsterwars.data.Directions;
 import monsterwars.data.Town;
 
@@ -17,8 +16,8 @@ public class TownDataMapCreator {
     private static final String SPLIT_REGEX_PATTERN = "\\s+";
     private static final String STRING_SPLIT_ERROR_MESSAGE = "The following line could not be processed during world map creation: ";
 
-    public Map<Town, Map<DirectionNames, Town >> create(final Set<String> rawData) {
-        TreeMap<Town, Map<DirectionNames, Town>> map = new TreeMap<>();
+    public Map<Town, Map<Directions, Town >> create(final Set<String> rawData) {
+        TreeMap<Town, Map<Directions, Town>> map = new TreeMap<>();
         rawData.forEach(line -> map.put(createNewTown(line), new HashMap<>()));
         return map;
     }

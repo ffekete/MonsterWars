@@ -2,7 +2,7 @@ package monsterwars.builder;
 
 import monsterwars.builder.creator.TownDataMapCreator;
 import monsterwars.builder.filler.TownDataDirectionsFiller;
-import monsterwars.data.DirectionNames;
+import monsterwars.data.Directions;
 import monsterwars.data.Town;
 import monsterwars.data.WorldMap;
 
@@ -23,7 +23,7 @@ public class WorldMapBuilder {
     }
 
     public WorldMap build(final Set<String> rawData) {
-        Map<Town, Map<DirectionNames, Town>> map = townDataMapCreator.create(rawData);
+        Map<Town, Map<Directions, Town>> map = townDataMapCreator.create(rawData);
         return townDataDirectionsFiller.fill(map, rawData);
     }
 }

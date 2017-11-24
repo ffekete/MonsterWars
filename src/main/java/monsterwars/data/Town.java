@@ -3,7 +3,7 @@ package monsterwars.data;
 /**
  * Pojo representing a single town.
  */
-public class Town implements Comparable<Town>{
+public final class Town implements Comparable<Town>{
 
     private final String name;
 
@@ -16,7 +16,7 @@ public class Town implements Comparable<Town>{
     }
 
     @Override
-    public int compareTo(Town o) {
+    public int compareTo(final Town o) {
         return name.compareTo(o.getName());
     }
 }

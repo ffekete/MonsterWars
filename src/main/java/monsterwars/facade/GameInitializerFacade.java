@@ -3,6 +3,8 @@ package monsterwars.facade;
 import monsterwars.builder.WorldMapBuilder;
 import monsterwars.builder.creator.TownDataMapCreator;
 import monsterwars.builder.filler.TownDataDirectionsFiller;
+import monsterwars.data.Directions;
+import monsterwars.data.Town;
 import monsterwars.data.WorldMap;
 import monsterwars.main.Main;
 import monsterwars.reader.WorldMapFileReader;
@@ -10,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -24,8 +27,19 @@ public class GameInitializerFacade {
     public void init() {
         Set<String> rawData = readMap();
         WorldMap worldMap = buildWorldMap(rawData);
-        System.out.println(worldMap.getMap().keySet().size());
-        worldMap.getMap().keySet().forEach(town -> System.out.println("" + town.getName() + worldMap.getMap().get(town)));
+        printWorldMapLocations(worldMap);
+    }
+
+    private void printWorldMapLocations(final WorldMap worldMap) {
+        worldMap.getMap().keySet().forEach(town -> printData(worldMap, town));
+    }
+
+    private void printData(final WorldMap worldMap, final Town town) {
+        System.out.println("" + town.getName() + " " + getName(worldMap, town, Directions.NORTH) + " " + getName(worldMap, town, Directions.EAST) + " " + getName(worldMap, town, Directions.WEST) + " " + getName(worldMap, town, Directions.SOUTH));
+    }
+
+    private String getName(WorldMap worldMap, Town town, Directions direction) {
+        return Optional.ofNullable(worldMap.getMap().get(town).get(direction)).orElse(new Town("")).getName();
     }
 
     private WorldMap buildWorldMap(final Set<String> rawData) {

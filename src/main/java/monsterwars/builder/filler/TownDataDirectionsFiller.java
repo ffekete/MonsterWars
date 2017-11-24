@@ -1,6 +1,5 @@
 package monsterwars.builder.filler;
 
-import monsterwars.data.DirectionNames;
 import monsterwars.data.Directions;
 import monsterwars.data.Town;
 import monsterwars.data.WorldMap;
@@ -13,20 +12,21 @@ public class TownDataDirectionsFiller {
 
     private static final String SPLIT_REGEX_PATTERN = "\\s+";
 
-    public WorldMap fill(final Map<Town, Map<DirectionNames, Town>> map, final Set<String> rawData) {
+    public WorldMap fill(final Map<Town, Map<Directions, Town>> map, final Set<String> rawData) {
         rawData.forEach(lines -> {
             String[] tokens = lines.split(SPLIT_REGEX_PATTERN);
-            String townName = tokens[0];
+            String currentTownName = tokens[0];
             for (int i = 1; i < tokens.length; i++) {
                 final String nameOfTheTownToSearch = tokens[i].split("=")[1];
                 final String directionOfThatTown = tokens[i].split("=")[0];
-                final Optional<Town> townToPut = map.keySet().stream().filter(town -> town.getName().equals(nameOfTheTownToSearch)).findFirst();
-                map.keySet().stream().filter(town -> town.getName().equals(townName)).findFirst().map(town -> {
-                    map.get(town).put(DirectionNames.valueOf(directionOfThatTown.toUpperCase()), townToPut.get());
-                    return map;
-                });
+                final Optional<Town> townToPut = findTownInstanceInMap(map, nameOfTheTownToSearch);
+                townToPut.ifPresent(town -> map.get(new Town(currentTownName)).put(Directions.valueOf(directionOfThatTown.toUpperCase()), town));
             }
         });
         return new WorldMap(map);
+    }
+
+    private Optional<Town> findTownInstanceInMap(Map<Town, Map<Directions, Town>> map, String nameOfTheTownToSearch) {
+        return map.keySet().stream().filter(town -> town.getName().equals(nameOfTheTownToSearch)).findFirst();
     }
 }
