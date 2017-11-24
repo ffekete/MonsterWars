@@ -11,9 +11,9 @@ import java.util.TreeSet;
 
 import static org.testng.Assert.assertEquals;
 
-public class TownDataMapCreatorTest {
+public class TownMapCreatorTest {
 
-    private TownDataMapCreator underTest = new TownDataMapCreator(new RawMapFactory());
+    private TownMapCreator underTest = new TownMapCreator(new RawMapFactory());
 
     @Test
     public void fillShouldFillWorldMapWhenInputIsProper() {

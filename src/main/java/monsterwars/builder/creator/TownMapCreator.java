@@ -9,15 +9,15 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Converts ras lines of Strings to {@link monsterwars.data.WorldMap} content.
+ * Converts raw lines of Strings to {@link Map} content.
  */
-public class TownDataMapCreator {
+public class TownMapCreator {
 
     private static final String SPLIT_REGEX_PATTERN = "\\s+";
 
     private final RawMapFactory rawMapFactory;
 
-    public TownDataMapCreator(RawMapFactory rawMapFactory) {
+    public TownMapCreator(final RawMapFactory rawMapFactory) {
         this.rawMapFactory = rawMapFactory;
     }
 
@@ -27,9 +27,9 @@ public class TownDataMapCreator {
         return map;
     }
 
-    private Map<Directions, Town> fillMap(Map<Town, Map<Directions, Town>> map, String line) {
+    private void fillMap(final Map<Town, Map<Directions, Town>> map, final String line) {
         Town currentTown = createNewTown(line);
-        Map m = map.put(currentTown, new HashMap<>());
+        map.put(currentTown, new HashMap<>());
         String[] tokens = line.split("\\s");
         for (int i = 1; i < tokens.length; i++) {
             String townLink = tokens[i];
@@ -38,7 +38,6 @@ public class TownDataMapCreator {
             Town townToLinkInstance = new Town(townToLink);
             map.get(currentTown).put(Directions.valueOf(direction.toUpperCase()), townToLinkInstance);
         }
-        return m;
     }
 
     private Town createNewTown(final String line) {

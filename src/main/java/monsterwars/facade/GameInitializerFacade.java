@@ -1,7 +1,7 @@
 package monsterwars.facade;
 
 import monsterwars.builder.WorldMapBuilder;
-import monsterwars.builder.creator.TownDataMapCreator;
+import monsterwars.builder.creator.TownMapCreator;
 import monsterwars.builder.factory.RawMapFactory;
 import monsterwars.data.Directions;
 import monsterwars.data.Town;
@@ -43,7 +43,7 @@ public class GameInitializerFacade {
     }
 
     private WorldMap buildWorldMap(final Set<String> rawData) {
-        WorldMapBuilder worldMapBuilder = new WorldMapBuilder(new TownDataMapCreator(new RawMapFactory()));
+        WorldMapBuilder worldMapBuilder = new WorldMapBuilder(new TownMapCreator(new RawMapFactory()));
         return worldMapBuilder.build(rawData);
     }
 

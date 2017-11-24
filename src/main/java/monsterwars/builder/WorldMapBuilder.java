@@ -1,6 +1,6 @@
 package monsterwars.builder;
 
-import monsterwars.builder.creator.TownDataMapCreator;
+import monsterwars.builder.creator.TownMapCreator;
 import monsterwars.data.WorldMap;
 
 import java.util.Set;
@@ -10,13 +10,13 @@ import java.util.Set;
  */
 public class WorldMapBuilder {
 
-    private final TownDataMapCreator townDataMapCreator;
+    private final TownMapCreator townMapCreator;
 
-    public WorldMapBuilder(final TownDataMapCreator townDataMapCreator) {
-        this.townDataMapCreator = townDataMapCreator;
+    public WorldMapBuilder(final TownMapCreator townMapCreator) {
+        this.townMapCreator = townMapCreator;
     }
 
     public WorldMap build(final Set<String> rawData) {
-       return new WorldMap(townDataMapCreator.create(rawData));
+       return new WorldMap(townMapCreator.create(rawData));
     }
 }
