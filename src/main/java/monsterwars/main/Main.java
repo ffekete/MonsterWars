@@ -23,7 +23,7 @@ public class Main {
         MonsterLocationsInitializerFacade monsterLocationsInitializerFacade = new MonsterLocationsInitializerFacade(new LocationsFactory(), new LocationsInitializer(), new MonsterDeployer(new MonsterFactory(), new RandomMonsterPlacementStrategy()));
 
         WorldMap worldMap = gameInitializerFacade.init();
-        MonsterLocations monsterLocations = monsterLocationsInitializerFacade.init(1000, worldMap.getMap().keySet());
+        MonsterLocations monsterLocations = monsterLocationsInitializerFacade.init(1000L, worldMap.getMap().keySet());
 
         monsterLocations.getTowns().forEach(town -> System.out.println(town.getName() + " " + monsterLocations.getListOfMonsters(town)));
 

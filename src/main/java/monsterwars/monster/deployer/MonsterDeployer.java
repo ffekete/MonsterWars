@@ -20,7 +20,7 @@ public class MonsterDeployer {
         this.monsterPlacementStrategy = monsterPlacementStrategy;
     }
 
-    public void deploy(final int numberOfMonsters, final MonsterLocations locations) {
+    public void deploy(final Long numberOfMonsters, final MonsterLocations locations) {
         final Set<Town> towns = locations.getTowns();
         int numberOfTowns = getNumberOfTowns(towns);
         ArrayList<Town> listOfTowns = convertSetOfTownsToList(towns);

@@ -29,7 +29,7 @@ public class MonsterDeployerTest {
     private static final String TOWN_A_NAME = "A";
     private static final String TOWN_B_NAME = "B";
     private static final String TOWN_C_NAME = "C";
-    private static final int NUMBER_OF_MONSTERS = 3;
+    private static final Long NUMBER_OF_MONSTERS = 3L;
 
     private final IMocksControl control = EasyMock.createStrictControl();
 
@@ -70,7 +70,7 @@ public class MonsterDeployerTest {
         // THEN
         control.verify();
         int actualNumberOfMonsters = monsterLocations.getTowns().stream().mapToInt(town -> monsterLocations.getListOfMonsters(town).size()).sum();
-        assertEquals(actualNumberOfMonsters, NUMBER_OF_MONSTERS);
+        assertEquals(Long.valueOf(actualNumberOfMonsters), NUMBER_OF_MONSTERS);
         long nrOfTownsWithTwoMonsters = monsterLocations.getTowns().stream().filter(town -> monsterLocations.getListOfMonsters(town).size() == 2).count();
         assertEquals(nrOfTownsWithTwoMonsters, 1);
         long nrOfTownsWithOneMonsters = monsterLocations.getTowns().stream().filter(town -> monsterLocations.getListOfMonsters(town).size() == 1).count();
