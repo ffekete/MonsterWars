@@ -1,5 +1,6 @@
 package monsterwars.monster.deployer;
 
+import com.google.inject.Inject;
 import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterLocations;
 import monsterwars.monster.factory.MonsterFactory;
@@ -15,6 +16,7 @@ public class MonsterDeployer {
     private final MonsterFactory monsterFactory;
     private final MonsterPlacementStrategy monsterPlacementStrategy;
 
+    @Inject
     public MonsterDeployer(final MonsterFactory monsterFactory, final MonsterPlacementStrategy monsterPlacementStrategy) {
         this.monsterFactory = monsterFactory;
         this.monsterPlacementStrategy = monsterPlacementStrategy;

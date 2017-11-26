@@ -1,7 +1,5 @@
 package monsterwars.monster;
 
-import monsterwars.worldmap.data.Town;
-
 public final class Monster {
 
     private final String name;

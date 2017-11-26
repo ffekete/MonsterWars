@@ -1,5 +1,6 @@
 package monsterwars.monster.initializer;
 
+import com.google.inject.Inject;
 import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterLocations;
 import monsterwars.monster.factory.MonsterListFactory;
@@ -12,6 +13,7 @@ public class LocationsInitializer {
 
     private final MonsterListFactory monsterListFactory;
 
+    @Inject
     public LocationsInitializer(final MonsterListFactory monsterListFactory) {
         this.monsterListFactory = monsterListFactory;
     }
