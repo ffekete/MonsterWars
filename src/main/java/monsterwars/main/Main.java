@@ -5,6 +5,7 @@ import monsterwars.monster.MonsterLocationsInitializerFacade;
 import monsterwars.monster.deployer.MonsterDeployer;
 import monsterwars.monster.factory.LocationsFactory;
 import monsterwars.monster.factory.MonsterFactory;
+import monsterwars.monster.factory.MonsterListFactory;
 import monsterwars.monster.initializer.LocationsInitializer;
 import monsterwars.monster.strategy.RandomMonsterPlacementStrategy;
 import monsterwars.worldmap.WorldMap;
@@ -20,7 +21,7 @@ public class Main {
         LocalDateTime time = LocalDateTime.now();
 
         GameInitializerFacade gameInitializerFacade = new GameInitializerFacade();
-        MonsterLocationsInitializerFacade monsterLocationsInitializerFacade = new MonsterLocationsInitializerFacade(new LocationsFactory(), new LocationsInitializer(), new MonsterDeployer(new MonsterFactory(), new RandomMonsterPlacementStrategy()));
+        MonsterLocationsInitializerFacade monsterLocationsInitializerFacade = new MonsterLocationsInitializerFacade(new LocationsFactory(), new LocationsInitializer(new MonsterListFactory()), new MonsterDeployer(new MonsterFactory(), new RandomMonsterPlacementStrategy()));
 
         WorldMap worldMap = gameInitializerFacade.init();
         MonsterLocations monsterLocations = monsterLocationsInitializerFacade.init(1000L, worldMap.getMap().keySet());
