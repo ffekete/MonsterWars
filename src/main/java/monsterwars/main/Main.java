@@ -9,6 +9,7 @@ import monsterwars.monster.MonsterLocationsInitializerFacade;
 import monsterwars.monster.MonsterModule;
 import monsterwars.worldmap.WorldMap;
 import monsterwars.worldmap.WorldMapModule;
+import monsterwars.worldmap.data.Directions;
 import monsterwars.worldmap.facade.WorldMapInitializerFacade;
 
 import java.io.IOException;
@@ -32,7 +33,11 @@ public class Main {
 
         gameRunner.runWith(worldMap, monsterLocations, monsterContainer);
 
-        monsterLocations.getTowns().forEach(town -> System.out.println(town.getName() + " " + monsterLocations.getListOfMonsters(town)));
+        monsterLocations.getTowns().forEach(town -> {
+            System.out.print(town.getName() + " ");
+            worldMap.getMap().get(town).forEach((directions, town1) -> System.out.print(directions.getName() + ": " + town1.getName() + " "));
+            System.out.println("");
+        });
 
         LocalDateTime endTime = LocalDateTime.now();
         System.out.println("Ms: " + time.until(endTime, ChronoUnit.MILLIS));
