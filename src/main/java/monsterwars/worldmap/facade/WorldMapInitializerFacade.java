@@ -21,7 +21,7 @@ public class WorldMapInitializerFacade {
         return buildWorldMap(rawData);
     }
 
-    private WorldMap buildWorldMap(final Set<String> rawData) {
+    private WorldMap buildWorldMap(Set<String> rawData) {
         WorldMapBuilder worldMapBuilder = new WorldMapBuilder(new TownMapCreator(new RawMapFactory()));
         return worldMapBuilder.build(rawData);
     }

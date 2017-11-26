@@ -5,6 +5,7 @@ import com.google.inject.Singleton;
 import monsterwars.monster.factory.MonsterListFactory;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 @Singleton
 public class MonsterContainer {
@@ -28,5 +29,9 @@ public class MonsterContainer {
 
     public Long getNumberOfMonsters() {
         return Long.valueOf(monsterList.size());
+    }
+
+    public Stream<Monster> getContainerAsStream() {
+        return monsterList.stream();
     }
 }

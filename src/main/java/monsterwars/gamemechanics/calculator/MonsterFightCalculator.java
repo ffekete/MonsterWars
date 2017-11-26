@@ -18,7 +18,7 @@ public class MonsterFightCalculator {
         this.monsterContainer = monsterContainer;
     }
 
-    public List<Monster> calculate(final List<Monster> monsters) {
+    public List<Monster> calculate(List<Monster> monsters) {
         if(monsters.size() > 1) {
             System.out.println("The following monsters killed each other: " + monsters);
             monsterContainer.removeMonsters(monsters);

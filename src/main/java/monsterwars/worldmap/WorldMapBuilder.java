@@ -15,7 +15,7 @@ public class WorldMapBuilder {
         this.townMapCreator = townMapCreator;
     }
 
-    public WorldMap build(final Set<String> rawData) {
+    public WorldMap build(Set<String> rawData) {
        return new WorldMap(townMapCreator.createFrom(rawData));
     }
 }

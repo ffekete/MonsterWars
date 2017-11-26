@@ -1,6 +1,7 @@
 package monsterwars.monster.deployer;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterContainer;
 import monsterwars.monster.MonsterLocations;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+@Singleton
 public class MonsterDeployer {
 
     private final MonsterFactory monsterFactory;

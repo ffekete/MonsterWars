@@ -11,8 +11,8 @@ import java.util.Random;
 
 public class MovementCalculator {
 
-    public void moveMonster(final Monster monster, final Town actualTown, Map<Directions, Town> possibleDirections, MonsterLocations monsterLocations) {
-        Directions directionToMove = new ArrayList<Directions>(possibleDirections.keySet()).get(new Random().nextInt(possibleDirections.keySet().size()));
+    public void moveMonster(Monster monster, Town actualTown, Map<Directions, Town> possibleDirections, MonsterLocations monsterLocations) {
+        Directions directionToMove = new ArrayList<>(possibleDirections.keySet()).get(new Random().nextInt(possibleDirections.keySet().size()));
         monsterLocations.addMonsterToTown(possibleDirections.get(directionToMove), monster);
         monsterLocations.removeMonsterFromTown(actualTown, monster);
     }

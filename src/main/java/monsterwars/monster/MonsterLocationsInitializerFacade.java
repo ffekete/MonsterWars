@@ -23,7 +23,7 @@ public class MonsterLocationsInitializerFacade {
         this.monsterContainer = monsterContainer;
     }
 
-    public MonsterLocations init(final Long numberOfMonsters, final Set<Town> towns) {
+    public MonsterLocations init(final Long numberOfMonsters, Set<Town> towns) {
         MonsterLocations locations = new MonsterLocations(locationsFactory.create());
         locationsInitializer.initialize(locations, towns);
         monsterDeployer.deployAll(numberOfMonsters, locations, monsterContainer);

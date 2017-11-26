@@ -22,33 +22,38 @@ public class TownMapCreator {
         this.rawMapFactory = rawMapFactory;
     }
 
-    public Map<Town, Map<Directions, Town>> createFrom(final Set<String> rawData) {
+    public Map<Town, Map<Directions, Town>> createFrom(Set<String> rawData) {
         Map<Town, Map<Directions, Town>> map = rawMapFactory.create();
         rawData.forEach(line -> fillMap(map, line));
         return map;
     }
 
-    private void fillMap(final Map<Town, Map<Directions, Town>> map, final String line) {
+    private void fillMap(Map<Town, Map<Directions, Town>> map, String line) {
         String[] tokens = splitLineToTokens(line, SPACE_SEPARATOR);
-        Town currentTown = createNewTown(tokens[0]);
+        Town currentTown = createNewTown(tokens[0], map);
         placeCurrentTownToMap(map, currentTown);
         for (int i = 1; i < tokens.length; i++) {
             String direction = getDirectionFromCurrentToken(tokens[i]);
             String nameOfTownToLink = getTownNameFromCurrentToken(tokens[i]);
-            Town townToLink = new Town(nameOfTownToLink);
+            Town townToLink = getTownToLink(nameOfTownToLink, map);
+            map.computeIfAbsent(townToLink, k -> new HashMap<>());
             map.get(currentTown).put(getTownDirection(direction), townToLink);
         }
+    }
+
+    private Town getTownToLink(String nameOfTownToLink, Map<Town, Map<Directions, Town>> map) {
+        return map.keySet().stream().filter(town -> town.getName().equals(nameOfTownToLink)).findFirst().orElse(new Town(nameOfTownToLink));
     }
 
     private String[] splitLineToTokens(final String line, final String regex) {
         return line.split(regex);
     }
 
-    private Town createNewTown(final String name) {
-        return new Town(name);
+    private Town createNewTown(final String name, Map<Town, Map<Directions, Town>> map) {
+        return map.keySet().stream().filter(town -> town.getName().equals(name)).findFirst().orElse(new Town(name));
     }
 
-    private void placeCurrentTownToMap(final Map<Town, Map<Directions, Town>> map, final Town currentTown) {
+    private void placeCurrentTownToMap(Map<Town, Map<Directions, Town>> map, Town currentTown) {
         map.put(currentTown, new HashMap<>());
     }
 

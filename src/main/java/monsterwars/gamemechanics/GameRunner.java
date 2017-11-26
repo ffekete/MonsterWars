@@ -6,6 +6,7 @@ import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterContainer;
 import monsterwars.monster.MonsterLocations;
 import monsterwars.worldmap.WorldMap;
+import monsterwars.worldmap.data.Town;
 
 import java.util.List;
 
@@ -20,13 +21,16 @@ public class GameRunner {
         this.movementCalculator = movementCalculator;
     }
 
-    public void runWith(final WorldMap worldMap, final MonsterLocations monsterLocations, final MonsterContainer monsterContainer) {
+    public void runWith(WorldMap worldMap, MonsterLocations monsterLocations, MonsterContainer monsterContainer) {
         for(int i = 0; i < 10000; i++) {
-            if(monsterContainer.getNumberOfMonsters() == 0) break;
-
+            if(monsterContainer.getNumberOfMonsters() < 2) break;
             monsterLocations.getTowns().forEach(town -> {
                 List<Monster> newList = monsterFightCalculator.calculate(monsterLocations.getListOfMonsters(town));
                 monsterLocations.addMonstersToTown(town, newList);
+            });
+            monsterContainer.getContainerAsStream().forEach(monster -> {
+                Town townWherMonsterStays = monsterLocations.getTowns().stream().filter(town -> monsterLocations.getListOfMonsters(town).contains(monster)).findFirst().get();
+                movementCalculator.moveMonster(monster, townWherMonsterStays, worldMap.getMap().get(townWherMonsterStays), monsterLocations);
             });
         }
     }
