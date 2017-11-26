@@ -3,6 +3,8 @@ package monsterwars.gamemechanics.calculator;
 import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterContainer;
 import monsterwars.monster.factory.MonsterListFactory;
+import monsterwars.worldmap.WorldMap;
+import monsterwars.worldmap.data.Town;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
 import org.testng.annotations.BeforeClass;
@@ -12,6 +14,7 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.easymock.EasyMock.expect;
@@ -56,7 +59,7 @@ public class MonsterFightCalculatorTest {
         monsterContainer.addMonster(monster3);
         control.replay();
         // WHEN
-        List<Monster> result = underTest.calculate(listOfMonsters);
+        List<Monster> result = underTest.calculate(listOfMonsters, new Town("a"), new WorldMap(new HashMap<>()), new HashMap<>());
         // THEN
         control.verify();
         assertTrue(emptyList.equals(result));
@@ -68,7 +71,7 @@ public class MonsterFightCalculatorTest {
         // GIVEN
         List<Monster> listOfMonsters = Collections.singletonList(monster);
         // WHEN
-        List<Monster> result = underTest.calculate(listOfMonsters);
+        List<Monster> result = underTest.calculate(listOfMonsters, new Town("a"), new WorldMap(new HashMap<>()), new HashMap<>());
         // THEN
         assertTrue(result.equals(listOfMonsters));
     }

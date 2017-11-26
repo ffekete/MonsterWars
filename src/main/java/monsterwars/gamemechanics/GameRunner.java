@@ -25,7 +25,7 @@ public class GameRunner {
         for(int i = 0; i < 10000; i++) {
             if(monsterContainer.getNumberOfMonsters() < 2) break;
             monsterLocations.getTowns().forEach(town -> {
-                List<Monster> newList = monsterFightCalculator.calculate(monsterLocations.getListOfMonsters(town));
+                List<Monster> newList = monsterFightCalculator.calculate(monsterLocations.getListOfMonsters(town), town, worldMap, worldMap.getMap().get(town));
                 monsterLocations.addMonstersToTown(town, newList);
             });
             monsterContainer.getContainerAsStream().forEach(monster -> {
