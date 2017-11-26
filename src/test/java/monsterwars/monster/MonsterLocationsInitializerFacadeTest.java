@@ -19,6 +19,7 @@ public class MonsterLocationsInitializerFacadeTest {
     private static final String TOWN_A_NAME = "A";
     private static final String TOWN_B_NAME = "B";
     private static final String TOWN_C_NAME = "C";
+    private static final long NUMBER_OF_MONSTERS = 10L;
 
     private final IMocksControl control = EasyMock.createStrictControl();
 
@@ -49,7 +50,7 @@ public class MonsterLocationsInitializerFacadeTest {
         EasyMock.expectLastCall();
         control.replay();
         // WHEN
-        underTest.init(10L, towns);
+        underTest.init(NUMBER_OF_MONSTERS, towns);
         // THEN
         control.verify();
     }
