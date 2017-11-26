@@ -22,6 +22,14 @@ public class MonsterLocations {
         locations.put(town, monsters);
     }
 
+    public void removeMonsterFromTown(final Town town, final Monster monster) {
+        locations.get(town).remove(monster);
+    }
+
+    public void addMonsterToTown(final Town town, final Monster monster) {
+        locations.get(town).add(monster);
+    }
+
     public Set<Town> getTowns() {
         return locations.keySet();
     }

@@ -4,6 +4,9 @@ import com.google.inject.AbstractModule;
 import monsterwars.monster.strategy.MonsterPlacementStrategy;
 import monsterwars.monster.strategy.RandomMonsterPlacementStrategy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MonsterModule extends AbstractModule {
 
     @Override

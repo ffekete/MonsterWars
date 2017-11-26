@@ -23,6 +23,6 @@ public class LocationsInitializer {
     }
 
     private List<Monster> getEmptyListOfMonsters() {
-        return monsterListFactory.create();
+        return monsterListFactory.createEmpty();
     }
 }

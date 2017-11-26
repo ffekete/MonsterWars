@@ -1,8 +1,10 @@
 package monsterwars.monster.deployer;
 
 import monsterwars.monster.Monster;
+import monsterwars.monster.MonsterContainer;
 import monsterwars.monster.MonsterLocations;
 import monsterwars.monster.factory.MonsterFactory;
+import monsterwars.monster.factory.MonsterListFactory;
 import monsterwars.monster.strategy.MonsterPlacementStrategy;
 import monsterwars.worldmap.data.Town;
 import org.easymock.EasyMock;
@@ -64,9 +66,10 @@ public class MonsterDeployerTest {
         locationsMap.put(townB, new ArrayList<>());
         locationsMap.put(townC, new ArrayList<>());
         MonsterLocations monsterLocations = new MonsterLocations(locationsMap);
+        MonsterContainer listOfMonsters = new MonsterContainer(new MonsterListFactory());
         control.replay();
         // WHEN
-        underTest.deploy(NUMBER_OF_MONSTERS, monsterLocations);
+        underTest.deployAll(NUMBER_OF_MONSTERS, monsterLocations, listOfMonsters);
         // THEN
         control.verify();
         int actualNumberOfMonsters = monsterLocations.getTowns().stream().mapToInt(town -> monsterLocations.getListOfMonsters(town).size()).sum();
@@ -77,6 +80,7 @@ public class MonsterDeployerTest {
         assertEquals(nrOfTownsWithOneMonsters, 1);
         long nrOfTownsWithZeroMonsters = monsterLocations.getTowns().stream().filter(town -> monsterLocations.getListOfMonsters(town).size() == 0).count();
         assertEquals(nrOfTownsWithZeroMonsters, 1);
+        assertEquals(listOfMonsters.getNumberOfMonsters(), NUMBER_OF_MONSTERS);
     }
 
 

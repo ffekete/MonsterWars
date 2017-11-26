@@ -7,7 +7,7 @@ import java.util.List;
 
 public class MonsterListFactory {
 
-    public List<Monster> create() {
+    public List<Monster> createEmpty() {
         return new ArrayList<>();
     }
 }

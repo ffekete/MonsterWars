@@ -39,7 +39,7 @@ public class LocationsInitializerTest {
         Town townB = new Town(TOWN_B_NAME);
         Town townC = new Town(TOWN_C_NAME);
         Set<Town> towns = new TreeSet<>(Arrays.asList(townA, townB, townC));
-        expect(monsterListFactory.create()).andReturn(Collections.emptyList()).times(NUMBER_OF_TOWNS);
+        expect(monsterListFactory.createEmpty()).andReturn(Collections.emptyList()).times(NUMBER_OF_TOWNS);
         control.replay();
         // WHEN
         underTest.initialize(monsterLocations, towns);

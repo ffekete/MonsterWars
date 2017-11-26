@@ -27,13 +27,15 @@ public class MonsterLocationsInitializerFacadeTest {
     private LocationsFactory locationsFactory;
     private MonsterDeployer monsterDeployer;
     private LocationsInitializer locationsInitializer;
+    private MonsterContainer monsterContainer;
 
     @BeforeClass
     public void setUp() {
         locationsFactory = control.createMock(LocationsFactory.class);
         monsterDeployer = control.createMock(MonsterDeployer.class);
         locationsInitializer = control.createMock(LocationsInitializer.class);
-        underTest = new MonsterLocationsInitializerFacade(locationsFactory, locationsInitializer, monsterDeployer);
+        monsterContainer = control.createMock(MonsterContainer.class);
+        underTest = new MonsterLocationsInitializerFacade(locationsFactory, locationsInitializer, monsterDeployer, monsterContainer);
     }
 
     @Test
@@ -46,7 +48,7 @@ public class MonsterLocationsInitializerFacadeTest {
         Set<Town> towns = new TreeSet<>(Arrays.asList(townA, townB, townC));
         expect(locationsFactory.create()).andReturn(locations);
         locationsInitializer.initialize(anyObject(), anyObject());
-        monsterDeployer.deploy(anyObject(), anyObject());
+        monsterDeployer.deployAll(anyObject(), anyObject(), anyObject());
         EasyMock.expectLastCall();
         control.replay();
         // WHEN

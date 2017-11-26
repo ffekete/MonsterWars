@@ -1,6 +1,7 @@
 package monsterwars.gamemechanics.calculator;
 
 import monsterwars.monster.Monster;
+import monsterwars.monster.MonsterContainer;
 import monsterwars.monster.factory.MonsterListFactory;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
@@ -14,13 +15,17 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.easymock.EasyMock.expect;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class MonsterFightCalculatorTest {
 
     private static final String MONSTER_1_NAME = "1";
     private static final String MONSTER_2_NAME = "2";
+    private static final String MONSTER_3_NAME = "3";
+
     private final IMocksControl control = EasyMock.createControl();
+    private final MonsterContainer monsterContainer = new MonsterContainer(new MonsterListFactory());
 
     private MonsterListFactory monsterListFactory;
     private MonsterFightCalculator underTest;
@@ -28,7 +33,8 @@ public class MonsterFightCalculatorTest {
     @BeforeClass
     public void setUp() {
         monsterListFactory = control.createMock(MonsterListFactory.class);
-        underTest = new MonsterFightCalculator(monsterListFactory);
+
+        underTest = new MonsterFightCalculator(monsterListFactory, monsterContainer);
     }
 
     @BeforeMethod
@@ -40,14 +46,21 @@ public class MonsterFightCalculatorTest {
     public void testCalculateShouldReturnWithEmptyListIfMoreMonstersAreInTheList() {
         // GIVEN
         List<Monster> emptyList = Collections.emptyList();
-        List<Monster> listOfMonsters = Arrays.asList(new Monster(MONSTER_1_NAME), new Monster(MONSTER_2_NAME));
-        expect(monsterListFactory.create()).andReturn(emptyList);
+        Monster monster1 = new Monster(MONSTER_1_NAME);
+        Monster monster2 = new Monster(MONSTER_2_NAME);
+        Monster monster3 = new Monster(MONSTER_3_NAME);
+        List<Monster> listOfMonsters = Arrays.asList(monster1, monster2);
+        expect(monsterListFactory.createEmpty()).andReturn(emptyList);
+        monsterContainer.addMonster(monster1);
+        monsterContainer.addMonster(monster2);
+        monsterContainer.addMonster(monster3);
         control.replay();
         // WHEN
         List<Monster> result = underTest.calculate(listOfMonsters);
         // THEN
         control.verify();
         assertTrue(emptyList.equals(result));
+        assertEquals(monsterContainer.getNumberOfMonsters(), Long.valueOf(1L));
     }
 
     @Test(dataProvider = "provideMonster")

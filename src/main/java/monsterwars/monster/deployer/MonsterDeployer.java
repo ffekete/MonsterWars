@@ -2,6 +2,7 @@ package monsterwars.monster.deployer;
 
 import com.google.inject.Inject;
 import monsterwars.monster.Monster;
+import monsterwars.monster.MonsterContainer;
 import monsterwars.monster.MonsterLocations;
 import monsterwars.monster.factory.MonsterFactory;
 import monsterwars.monster.strategy.MonsterPlacementStrategy;
@@ -22,12 +23,13 @@ public class MonsterDeployer {
         this.monsterPlacementStrategy = monsterPlacementStrategy;
     }
 
-    public void deploy(final Long numberOfMonsters, final MonsterLocations locations) {
+    public void deployAll(final Long numberOfMonsters, final MonsterLocations locations, final MonsterContainer monsterContainer) {
         final Set<Town> towns = locations.getTowns();
         int numberOfTowns = getNumberOfTowns(towns);
         ArrayList<Town> listOfTowns = convertSetOfTownsToList(towns);
         for (int i = 0; i < numberOfMonsters; i++) {
             Monster monster = createMonster(i);
+            monsterContainer.addMonster(monster);
             int itemIndex = monsterPlacementStrategy.getIndex(numberOfTowns);
             getMonstersList(locations, listOfTowns, itemIndex).add(monster);
         }
