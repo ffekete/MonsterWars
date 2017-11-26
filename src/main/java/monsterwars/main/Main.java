@@ -2,6 +2,11 @@ package monsterwars.main;
 
 import monsterwars.monster.MonsterLocations;
 import monsterwars.monster.MonsterLocationsInitializerFacade;
+import monsterwars.monster.deployer.MonsterDeployer;
+import monsterwars.monster.factory.LocationsFactory;
+import monsterwars.monster.factory.MonsterFactory;
+import monsterwars.monster.initializer.LocationsInitializer;
+import monsterwars.monster.strategy.RandomMonsterPlacementStrategy;
 import monsterwars.worldmap.WorldMap;
 import monsterwars.worldmap.facade.GameInitializerFacade;
 
@@ -15,12 +20,12 @@ public class Main {
         LocalDateTime time = LocalDateTime.now();
 
         GameInitializerFacade gameInitializerFacade = new GameInitializerFacade();
-        MonsterLocationsInitializerFacade monsterLocationsInitializerFacade = new MonsterLocationsInitializerFacade();
+        MonsterLocationsInitializerFacade monsterLocationsInitializerFacade = new MonsterLocationsInitializerFacade(new LocationsFactory(), new LocationsInitializer(), new MonsterDeployer(new MonsterFactory(), new RandomMonsterPlacementStrategy()));
 
         WorldMap worldMap = gameInitializerFacade.init();
         MonsterLocations monsterLocations = monsterLocationsInitializerFacade.init(1000, worldMap.getMap().keySet());
 
-        monsterLocations.getLocations().forEach((town, monsters) -> System.out.println(town.getName() + " " + monsters));
+        monsterLocations.getTowns().forEach(town -> System.out.println(town.getName() + " " + monsterLocations.getListOfMonsters(town)));
 
         LocalDateTime endTime = LocalDateTime.now();
         System.out.println("Ms: " + time.until(endTime, ChronoUnit.MILLIS));
