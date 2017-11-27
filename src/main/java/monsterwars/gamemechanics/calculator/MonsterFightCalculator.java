@@ -6,7 +6,6 @@ import monsterwars.monster.MonsterLocations;
 import monsterwars.monster.factory.MonsterListFactory;
 import monsterwars.worldmap.WorldMap;
 import monsterwars.worldmap.data.Town;
-import monsterwars.worldmap.decorator.WorldMapDecorator;
 
 import java.util.List;
 
@@ -39,7 +38,7 @@ public class MonsterFightCalculator {
     }
 
     private void destroyTown(Town town, WorldMap worldMap) {
-        new WorldMapDecorator(worldMap).removeTownFromWorldMap(town);
+        worldMap.removeTownFromWorldMap(town);
     }
 
     private void printMonsterFightMessage(Town town, List<Monster> monsters) {
