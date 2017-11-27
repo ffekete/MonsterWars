@@ -7,7 +7,6 @@ import monsterwars.monster.MonsterLocations;
 import monsterwars.monster.MonsterLocationsInitializerFacade;
 import monsterwars.monster.MonsterModule;
 import monsterwars.worldmap.WorldMap;
-import monsterwars.worldmap.WorldMapModule;
 import monsterwars.worldmap.facade.WorldMapInitializerFacade;
 
 import java.io.IOException;
@@ -15,7 +14,7 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        Injector injector = Guice.createInjector(new MonsterModule(), new WorldMapModule());
+        Injector injector = Guice.createInjector(new MonsterModule());
         WorldMapInitializerFacade worldMapInitializerFacade = injector.getInstance(WorldMapInitializerFacade.class);
         MonsterLocationsInitializerFacade monsterLocationsInitializerFacade = injector.getInstance(MonsterLocationsInitializerFacade.class);
         GameRunner gameRunner = injector.getInstance(GameRunner.class);
