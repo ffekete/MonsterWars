@@ -25,7 +25,8 @@ public class GameRunner {
 
     /**
      * Runs game rules periodically.
-     * @param worldMap where monsters may roam.
+     *
+     * @param worldMap         where monsters may roam.
      * @param monsterLocations map of towns where monsters reside.
      */
     public void runWith(WorldMap worldMap, MonsterLocations monsterLocations) {

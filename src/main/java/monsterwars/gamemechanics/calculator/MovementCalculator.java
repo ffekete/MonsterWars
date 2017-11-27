@@ -17,10 +17,11 @@ public class MovementCalculator {
 
     /**
      * Moves one monster on the map.
-     * @param monster to move.
-     * @param actualTown where is the monster now?
+     *
+     * @param monster            to move.
+     * @param actualTown         where is the monster now?
      * @param possibleDirections where can the monster move?
-     * @param monsterLocations Storage where towns are linked with monsters.
+     * @param monsterLocations   Storage where towns are linked with monsters.
      */
     public void moveMonster(Monster monster, Town actualTown, Map<Directions, Town> possibleDirections, MonsterLocations monsterLocations) {
         Directions directionToMove = getRandomDirectionToMove(possibleDirections);

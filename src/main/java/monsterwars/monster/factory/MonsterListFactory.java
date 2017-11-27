@@ -12,6 +12,7 @@ public class MonsterListFactory {
 
     /**
      * Creates empty list of {@link Monster}.
+     *
      * @return list.
      */
     public List<Monster> createEmpty() {

@@ -1,8 +1,8 @@
 package monsterwars.worldmap.creator;
 
-import monsterwars.worldmap.factory.RawMapFactory;
 import monsterwars.worldmap.data.Directions;
 import monsterwars.worldmap.data.Town;
+import monsterwars.worldmap.factory.RawMapFactory;
 import monsterwars.worldmap.factory.TownDirectionsMapFactory;
 import monsterwars.worldmap.factory.TownFactory;
 import org.easymock.EasyMock;
@@ -13,7 +13,6 @@ import org.testng.annotations.Test;
 
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import static org.easymock.EasyMock.expect;

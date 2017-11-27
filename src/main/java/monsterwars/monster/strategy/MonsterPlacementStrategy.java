@@ -7,6 +7,7 @@ public interface MonsterPlacementStrategy {
 
     /**
      * Selects a monster index.
+     *
      * @param upperLimit upper limit for the index.
      * @return chosen index.
      */

@@ -23,7 +23,7 @@ public class MonsterFightCalculator {
         if (areThereMoreMonstersInThisTown(monsters)) {
             printMonsterFightMessage(town, monsters);
             destroyTown(town, worldMap);
-            printTownDestroyedMessage(town, worldMap);
+            printTownDestroyedMessage(town);
             return getEmptyMonsterList();
         }
         return monsters;
@@ -33,7 +33,7 @@ public class MonsterFightCalculator {
         return monsterListFactory.createEmpty();
     }
 
-    private void printTownDestroyedMessage(Town town, WorldMap worldMap) {
+    private void printTownDestroyedMessage(Town town) {
         System.out.println("Town " + town.getName() + " destroyed!");
     }
 
@@ -42,7 +42,7 @@ public class MonsterFightCalculator {
     }
 
     private void printMonsterFightMessage(Town town, List<Monster> monsters) {
-        monsters.forEach(monster -> System.out.print(monster.getName() + " and "));
+        monsters.forEach(monster -> System.out.print(monster.getName() + " and ")); // todo bug here
         System.out.println("killed each other  in town " + town.getName() + ".");
     }
 

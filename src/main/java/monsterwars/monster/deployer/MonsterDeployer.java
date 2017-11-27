@@ -29,8 +29,9 @@ public class MonsterDeployer {
 
     /**
      * Deploys all monsters.
+     *
      * @param numberOfMonsters how many monsters to deploy?
-     * @param locations possible locations to deploy.
+     * @param locations        possible locations to deploy.
      */
     public void deployAll(Long numberOfMonsters, MonsterLocations locations) {
         int numberOfTowns = getNumberOfTowns(getPossibleTowns(locations));

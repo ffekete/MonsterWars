@@ -9,6 +9,7 @@ public class TownFactory {
 
     /**
      * Creates the {@link Town} instance.
+     *
      * @param name name of the town.
      * @return instance.
      */

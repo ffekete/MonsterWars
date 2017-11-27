@@ -15,6 +15,7 @@ public class WorldMapFileReader {
 
     /**
      * Reads the given file and returns the lines in a set format.
+     *
      * @param fileName what to read.
      * @return the lines of the file.
      * @throws IOException when file is not readable or not found.

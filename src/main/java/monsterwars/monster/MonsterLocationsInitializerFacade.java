@@ -6,7 +6,7 @@ import monsterwars.monster.factory.LocationsFactory;
 import monsterwars.monster.initializer.LocationsInitializer;
 import monsterwars.worldmap.data.Town;
 
-import java.util.*;
+import java.util.Set;
 
 public class MonsterLocationsInitializerFacade {
 

@@ -1,7 +1,6 @@
 package monsterwars.monster.initializer;
 
 import monsterwars.monster.MonsterLocations;
-import monsterwars.monster.factory.LocationsFactory;
 import monsterwars.monster.factory.MonsterListFactory;
 import monsterwars.worldmap.data.Town;
 import org.easymock.EasyMock;
@@ -9,7 +8,10 @@ import org.easymock.IMocksControl;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static org.easymock.EasyMock.expect;

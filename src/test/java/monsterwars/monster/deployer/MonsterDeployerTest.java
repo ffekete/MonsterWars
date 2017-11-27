@@ -3,7 +3,6 @@ package monsterwars.monster.deployer;
 import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterLocations;
 import monsterwars.monster.factory.MonsterFactory;
-import monsterwars.monster.factory.MonsterListFactory;
 import monsterwars.monster.strategy.MonsterPlacementStrategy;
 import monsterwars.worldmap.data.Town;
 import org.easymock.EasyMock;

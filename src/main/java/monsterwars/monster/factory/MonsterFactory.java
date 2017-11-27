@@ -12,6 +12,7 @@ public class MonsterFactory {
 
     /**
      * Creates {@link Monster} instance.
+     *
      * @param number a number representing the index of the monster. Used for naming.
      * @return created instance.
      */

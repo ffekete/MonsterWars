@@ -13,6 +13,7 @@ public class TownDirectionsMapFactory {
 
     /**
      * Creates the {@link ConcurrentMap} instance.
+     *
      * @return created map.
      */
     public ConcurrentMap<Directions, Town> create() {

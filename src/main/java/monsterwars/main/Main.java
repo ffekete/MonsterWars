@@ -19,7 +19,7 @@ public class Main {
             System.out.println("No parameter was supplied! Please supply the number of monsters as a positive int number!");
         } else {
             Long numberOfMonsters = validateInputAndGetValue(args);
-            if ( numberOfMonsters != null && numberOfMonsters > 0) {
+            if (numberOfMonsters != null && numberOfMonsters > 0) {
                 // Initializing Environment
                 Injector injector = Guice.createInjector(new MonsterModule());
                 WorldMapInitializerFacade worldMapInitializerFacade = injector.getInstance(WorldMapInitializerFacade.class);
@@ -43,7 +43,8 @@ public class Main {
         } catch (NumberFormatException exception) {
             System.out.println("Not a valid number as a parameter: " + args[0]);
         }
-        if(numberOfMonsters != null && numberOfMonsters < 1) System.out.println("Too few monsters are specified: " + numberOfMonsters);
+        if (numberOfMonsters != null && numberOfMonsters < 1)
+            System.out.println("Too few monsters are specified: " + numberOfMonsters);
         return numberOfMonsters;
     }
 }
