@@ -13,6 +13,8 @@ import java.util.List;
 
 public class GameRunner {
 
+    private static final int MAX_NUMBER_OF_STEPS = 10000;
+
     private final MonsterFightCalculator monsterFightCalculator;
     private final MovementCalculator movementCalculator;
 
@@ -24,20 +26,14 @@ public class GameRunner {
 
     public void runWith(WorldMap worldMap, MonsterLocations monsterLocations, MonsterContainer monsterContainer) {
         int i;
-        for(i = 0; i < 10000 && areThereMonstersStillAlive(monsterContainer); i++) {
+        for (i = 0; i < MAX_NUMBER_OF_STEPS && areThereMonstersStillAlive(monsterContainer); i++) {
             monsterLocations.getTowns().forEach(town -> {
-                List<Monster> newList = fightMonstersInTown(worldMap, monsterLocations, town);
-                processListOfMonstersInTown(monsterLocations, town, newList);
-                if(isOneMonsterInTown(newList))
-                    moveThatMonsterToANewTown(worldMap, monsterLocations, town, newList);
+                List<Monster> newListOfMonstersInTown = fightMonstersInTown(worldMap, monsterLocations, town);
+                processListOfMonstersInTown(monsterLocations, town, newListOfMonstersInTown);
+                if (isOneMonsterInTown(newListOfMonstersInTown))
+                    moveThatMonsterToANewTown(worldMap, monsterLocations, town, newListOfMonstersInTown);
             });
         }
-        if(i == 10000) {
-            System.out.println("No more movement remains.");
-        } else {
-            System.out.println("No more monsters remain: " + monsterContainer.getNumberOfMonsters());
-        }
-
     }
 
     private void processListOfMonstersInTown(MonsterLocations monsterLocations, Town town, List<Monster> newList) {

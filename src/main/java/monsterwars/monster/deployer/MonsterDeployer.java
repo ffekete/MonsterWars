@@ -25,7 +25,7 @@ public class MonsterDeployer {
         this.monsterPlacementStrategy = monsterPlacementStrategy;
     }
 
-    public void deployAll(final Long numberOfMonsters, final MonsterLocations locations, final MonsterContainer monsterContainer) {
+    public void deployAll(Long numberOfMonsters, MonsterLocations locations, MonsterContainer monsterContainer) {
         final Set<Town> towns = locations.getTowns();
         int numberOfTowns = getNumberOfTowns(towns);
         List<Town> listOfTowns = convertSetOfTownsToList(towns);
@@ -37,7 +37,7 @@ public class MonsterDeployer {
         }
     }
 
-    private int getNumberOfTowns(final Set<Town> towns) {
+    private int getNumberOfTowns(Set<Town> towns) {
         return towns.size();
     }
 
@@ -49,7 +49,7 @@ public class MonsterDeployer {
         return monsterFactory.create(i);
     }
 
-    private ArrayList<Town> convertSetOfTownsToList(final Set<Town> towns) {
+    private ArrayList<Town> convertSetOfTownsToList(Set<Town> towns) {
         return new ArrayList<>(towns);
     }
 }
