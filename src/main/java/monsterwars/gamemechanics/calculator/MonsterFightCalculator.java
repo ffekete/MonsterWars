@@ -2,7 +2,6 @@ package monsterwars.gamemechanics.calculator;
 
 import com.google.inject.Inject;
 import monsterwars.monster.Monster;
-import monsterwars.monster.MonsterContainer;
 import monsterwars.monster.MonsterLocations;
 import monsterwars.monster.factory.MonsterListFactory;
 import monsterwars.worldmap.WorldMap;
@@ -14,19 +13,16 @@ import java.util.List;
 public class MonsterFightCalculator {
 
     private final MonsterListFactory monsterListFactory;
-    private final MonsterContainer monsterContainer;
 
     @Inject
-    public MonsterFightCalculator(final MonsterListFactory monsterListFactory, final MonsterContainer monsterContainer) {
+    public MonsterFightCalculator(final MonsterListFactory monsterListFactory) {
         this.monsterListFactory = monsterListFactory;
-        this.monsterContainer = monsterContainer;
     }
 
     public List<Monster> calculate(Town town, WorldMap worldMap, MonsterLocations monsterLocations) {
         List<Monster> monsters = monsterLocations.getListOfMonsters(town);
         if (areThereMoreMonstersInThisTown(monsters)) {
             printMonsterFightMessage(town, monsters);
-            killMonsters(monsters);
             destroyTown(town, worldMap);
             printTownDestroyedMessage(town, worldMap);
             return getEmptyMonsterList();
@@ -44,10 +40,6 @@ public class MonsterFightCalculator {
 
     private void destroyTown(Town town, WorldMap worldMap) {
         new WorldMapDecorator(worldMap).removeTownFromWorldMap(town);
-    }
-
-    private void killMonsters(List<Monster> monsters) {
-        monsterContainer.removeMonsters(monsters);
     }
 
     private void printMonsterFightMessage(Town town, List<Monster> monsters) {

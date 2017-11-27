@@ -1,9 +1,7 @@
 package monsterwars.gamemechanics.calculator;
 
 import monsterwars.monster.Monster;
-import monsterwars.monster.MonsterContainer;
 import monsterwars.monster.MonsterLocations;
-import monsterwars.monster.factory.LocationsFactory;
 import monsterwars.monster.factory.MonsterListFactory;
 import monsterwars.worldmap.WorldMap;
 import monsterwars.worldmap.data.Town;
@@ -14,9 +12,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -31,7 +27,6 @@ public class MonsterFightCalculatorTest {
     private static final String MONSTER_3_NAME = "3";
 
     private final IMocksControl control = EasyMock.createControl();
-    private final MonsterContainer monsterContainer = new MonsterContainer(new MonsterListFactory());
 
     private MonsterListFactory monsterListFactory;
     private MonsterFightCalculator underTest;
@@ -40,7 +35,7 @@ public class MonsterFightCalculatorTest {
     public void setUp() {
         monsterListFactory = control.createMock(MonsterListFactory.class);
 
-        underTest = new MonsterFightCalculator(monsterListFactory, monsterContainer);
+        underTest = new MonsterFightCalculator(monsterListFactory);
     }
 
     @BeforeMethod
@@ -56,16 +51,12 @@ public class MonsterFightCalculatorTest {
         Monster monster2 = new Monster(MONSTER_2_NAME);
         Monster monster3 = new Monster(MONSTER_3_NAME);
         expect(monsterListFactory.createEmpty()).andReturn(emptyList);
-        monsterContainer.addMonster(monster1);
-        monsterContainer.addMonster(monster2);
-        monsterContainer.addMonster(monster3);
         control.replay();
         // WHEN
         List<Monster> result = underTest.calculate(new Town("a"), new WorldMap(new ConcurrentHashMap<>()), new MonsterLocations(new ConcurrentHashMap<>()));
         // THEN
         control.verify();
         assertTrue(emptyList.equals(result));
-        assertEquals(monsterContainer.getNumberOfMonsters(), Long.valueOf(1L));
     }
 
     @Test(dataProvider = "provideMonster")

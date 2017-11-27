@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import monsterwars.gamemechanics.calculator.MonsterFightCalculator;
 import monsterwars.gamemechanics.calculator.MovementCalculator;
 import monsterwars.monster.Monster;
-import monsterwars.monster.MonsterContainer;
 import monsterwars.monster.MonsterLocations;
 import monsterwars.worldmap.WorldMap;
 import monsterwars.worldmap.data.Town;
@@ -24,9 +23,9 @@ public class GameRunner {
         this.movementCalculator = movementCalculator;
     }
 
-    public void runWith(WorldMap worldMap, MonsterLocations monsterLocations, MonsterContainer monsterContainer) {
+    public void runWith(WorldMap worldMap, MonsterLocations monsterLocations) {
         int i;
-        for (i = 0; i < MAX_NUMBER_OF_STEPS && areThereMonstersStillAlive(monsterContainer); i++) {
+        for (i = 0; i < MAX_NUMBER_OF_STEPS && areThereMonstersStillAlive(monsterLocations); i++) {
             monsterLocations.getTowns().forEach(town -> {
                 List<Monster> newListOfMonstersInTown = fightMonstersInTown(worldMap, monsterLocations, town);
                 processListOfMonstersInTown(monsterLocations, town, newListOfMonstersInTown);
@@ -44,8 +43,8 @@ public class GameRunner {
         return monsterFightCalculator.calculate(town, worldMap, monsterLocations);
     }
 
-    private boolean areThereMonstersStillAlive(MonsterContainer monsterContainer) {
-        return monsterContainer.getNumberOfMonsters() >= 2;
+    private boolean areThereMonstersStillAlive(MonsterLocations monsterLocations) {
+        return monsterLocations.getTowns().stream().mapToInt(town -> monsterLocations.getListOfMonsters(town).size()).sum() >= 2;
     }
 
     private void moveThatMonsterToANewTown(WorldMap worldMap, MonsterLocations monsterLocations, Town town, List<Monster> newList) {

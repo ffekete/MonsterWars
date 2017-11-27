@@ -3,7 +3,6 @@ package monsterwars.monster.deployer;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import monsterwars.monster.Monster;
-import monsterwars.monster.MonsterContainer;
 import monsterwars.monster.MonsterLocations;
 import monsterwars.monster.factory.MonsterFactory;
 import monsterwars.monster.strategy.MonsterPlacementStrategy;
@@ -32,14 +31,12 @@ public class MonsterDeployer {
      * Deploys all monsters.
      * @param numberOfMonsters how many monsters to deploy?
      * @param locations possible locations to deploy.
-     * @param monsterContainer list of monsters.
      */
-    public void deployAll(Long numberOfMonsters, MonsterLocations locations, MonsterContainer monsterContainer) {
+    public void deployAll(Long numberOfMonsters, MonsterLocations locations) {
         int numberOfTowns = getNumberOfTowns(getPossibleTowns(locations));
         List<Town> listOfTowns = convertSetOfTownsToList(getPossibleTowns(locations));
         for (int i = 0; i < numberOfMonsters; i++) {
             Monster monster = createMonster(i);
-            monsterContainer.addMonster(monster);
             int itemIndex = monsterPlacementStrategy.getIndex(numberOfTowns);
             getMonstersList(locations, listOfTowns, itemIndex).add(monster);
         }
