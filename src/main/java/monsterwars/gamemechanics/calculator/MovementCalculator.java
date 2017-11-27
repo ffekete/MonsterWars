@@ -8,12 +8,39 @@ import monsterwars.worldmap.data.Town;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
+/**
+ * Calculates {@Monster} movements on map.
+ */
 public class MovementCalculator {
 
+    /**
+     * Moves one monster on the map.
+     * @param monster to move.
+     * @param actualTown where is the monster now?
+     * @param possibleDirections where can the monster move?
+     * @param monsterLocations
+     */
     public void moveMonster(Monster monster, Town actualTown, Map<Directions, Town> possibleDirections, MonsterLocations monsterLocations) {
-        Directions directionToMove = new ArrayList<>(possibleDirections.keySet()).get(new Random().nextInt(possibleDirections.keySet().size()));
-        monsterLocations.addMonsterToTown(possibleDirections.get(directionToMove), monster);
+        Directions directionToMove = getRandomDirectionToMove(possibleDirections);
+        monsterLocations.addMonsterToTown(getDestinationTown(possibleDirections, directionToMove), monster);
         monsterLocations.removeMonsterFromTown(actualTown, monster);
+    }
+
+    private Town getDestinationTown(Map<Directions, Town> possibleDirections, Directions directionToMove) {
+        return possibleDirections.get(directionToMove);
+    }
+
+    private Directions getRandomDirectionToMove(Map<Directions, Town> possibleDirections) {
+        return new ArrayList<>(getPossibleDirections(possibleDirections)).get(getRandomIndex(possibleDirections));
+    }
+
+    private Set<Directions> getPossibleDirections(Map<Directions, Town> possibleDirections) {
+        return possibleDirections.keySet();
+    }
+
+    private int getRandomIndex(Map<Directions, Town> possibleDirections) {
+        return new Random().nextInt(getPossibleDirections(possibleDirections).size());
     }
 }

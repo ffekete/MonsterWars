@@ -24,10 +24,10 @@ public class GameRunner {
 
     public void runWith(WorldMap worldMap, MonsterLocations monsterLocations, MonsterContainer monsterContainer) {
         int i;
-        for(i = 0; i < 10000 && !isNoneLeftToFight(monsterContainer); i++) {
+        for(i = 0; i < 10000 && areThereMonstersStillAlive(monsterContainer); i++) {
             monsterLocations.getTowns().forEach(town -> {
-                List<Monster> newList = monsterFightCalculator.calculate(town, worldMap, monsterLocations);
-                monsterLocations.addMonstersToTown(town, newList);
+                List<Monster> newList = fightMonstersInTown(worldMap, monsterLocations, town);
+                processListOfMonstersInTown(monsterLocations, town, newList);
                 if(isOneMonsterInTown(newList))
                     moveThatMonsterToANewTown(worldMap, monsterLocations, town, newList);
             });
@@ -40,8 +40,16 @@ public class GameRunner {
 
     }
 
-    private boolean isNoneLeftToFight(MonsterContainer monsterContainer) {
-        return monsterContainer.getNumberOfMonsters() < 2;
+    private void processListOfMonstersInTown(MonsterLocations monsterLocations, Town town, List<Monster> newList) {
+        monsterLocations.addMonstersToTown(town, newList);
+    }
+
+    private List<Monster> fightMonstersInTown(WorldMap worldMap, MonsterLocations monsterLocations, Town town) {
+        return monsterFightCalculator.calculate(town, worldMap, monsterLocations);
+    }
+
+    private boolean areThereMonstersStillAlive(MonsterContainer monsterContainer) {
+        return monsterContainer.getNumberOfMonsters() >= 2;
     }
 
     private void moveThatMonsterToANewTown(WorldMap worldMap, MonsterLocations monsterLocations, Town town, List<Monster> newList) {

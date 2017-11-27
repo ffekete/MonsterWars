@@ -55,7 +55,6 @@ public class MonsterFightCalculatorTest {
         Monster monster1 = new Monster(MONSTER_1_NAME);
         Monster monster2 = new Monster(MONSTER_2_NAME);
         Monster monster3 = new Monster(MONSTER_3_NAME);
-        List<Monster> listOfMonsters = Arrays.asList(monster1, monster2);
         expect(monsterListFactory.createEmpty()).andReturn(emptyList);
         monsterContainer.addMonster(monster1);
         monsterContainer.addMonster(monster2);
