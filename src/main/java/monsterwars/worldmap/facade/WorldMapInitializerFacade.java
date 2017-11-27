@@ -5,6 +5,7 @@ import monsterwars.worldmap.WorldMapBuilder;
 import monsterwars.worldmap.creator.TownMapCreator;
 import monsterwars.worldmap.factory.RawMapFactory;
 import monsterwars.worldmap.factory.TownDirectionsMapFactory;
+import monsterwars.worldmap.factory.TownFactory;
 import monsterwars.worldmap.reader.WorldMapFileReader;
 
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class WorldMapInitializerFacade {
     }
 
     private WorldMap buildWorldMap(Set<String> rawData) {
-        WorldMapBuilder worldMapBuilder = new WorldMapBuilder(new TownMapCreator(new RawMapFactory(), new TownDirectionsMapFactory()));
+        WorldMapBuilder worldMapBuilder = new WorldMapBuilder(new TownMapCreator(new RawMapFactory(), new TownDirectionsMapFactory(), new TownFactory()));
         return worldMapBuilder.build(rawData);
     }
 
