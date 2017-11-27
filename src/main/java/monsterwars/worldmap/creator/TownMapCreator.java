@@ -1,5 +1,6 @@
 package monsterwars.worldmap.creator;
 
+import com.google.inject.Inject;
 import monsterwars.worldmap.data.Directions;
 import monsterwars.worldmap.data.Town;
 import monsterwars.worldmap.factory.RawMapFactory;
@@ -22,6 +23,7 @@ public class TownMapCreator {
     private final TownDirectionsMapFactory townDirectionsMapFactory;
     private final TownFactory townFactory;
 
+    @Inject
     public TownMapCreator(final RawMapFactory rawMapFactory, TownDirectionsMapFactory townDirectionsMapFactory, TownFactory townFactory) {
         this.rawMapFactory = rawMapFactory;
         this.townDirectionsMapFactory = townDirectionsMapFactory;

@@ -1,5 +1,8 @@
 package monsterwars.worldmap.data;
 
+/**
+ * Directions used for town directions.
+ */
 public enum Directions {
     NORTH("north"),
     SOUTH("south"),
