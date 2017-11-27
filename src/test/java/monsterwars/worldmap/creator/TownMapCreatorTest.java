@@ -3,9 +3,9 @@ package monsterwars.worldmap.creator;
 import monsterwars.worldmap.factory.RawMapFactory;
 import monsterwars.worldmap.data.Directions;
 import monsterwars.worldmap.data.Town;
+import monsterwars.worldmap.factory.TownDirectionsMapFactory;
 import org.testng.annotations.Test;
 
-import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentMap;
@@ -15,7 +15,7 @@ import static org.testng.Assert.assertNull;
 
 public class TownMapCreatorTest {
 
-    private TownMapCreator underTest = new TownMapCreator(new RawMapFactory());
+    private TownMapCreator underTest = new TownMapCreator(new RawMapFactory(), new TownDirectionsMapFactory());
 
     @Test
     public void fillShouldFillWorldMapWhenInputIsProper() {

@@ -19,10 +19,7 @@ import java.time.temporal.ChronoUnit;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        LocalDateTime time = LocalDateTime.now();
-
         Injector injector = Guice.createInjector(new MonsterModule(), new WorldMapModule());
-
         WorldMapInitializerFacade worldMapInitializerFacade = injector.getInstance(WorldMapInitializerFacade.class);
         MonsterLocationsInitializerFacade monsterLocationsInitializerFacade = injector.getInstance(MonsterLocationsInitializerFacade.class);
         GameRunner gameRunner = injector.getInstance(GameRunner.class);
@@ -35,9 +32,5 @@ public class Main {
             worldMap.getMap().get(town).forEach((directions, town1) -> System.out.print(directions.getName() + ": " + town1.getName() + " "));
             System.out.println("");
         });
-        System.out.println(worldMap.getMap().keySet().size());
-        System.out.println(monsterLocations.getTowns().size());
-        LocalDateTime endTime = LocalDateTime.now();
-        System.out.println("Ms: " + time.until(endTime, ChronoUnit.MILLIS));
     }
 }
