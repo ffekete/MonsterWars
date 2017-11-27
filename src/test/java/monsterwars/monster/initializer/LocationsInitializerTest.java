@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static org.easymock.EasyMock.expect;
 import static org.testng.Assert.assertEquals;
@@ -34,7 +35,7 @@ public class LocationsInitializerTest {
     @Test
     public void testShouldInitializeMapWithEmptyListOfMonstersForAllTowns() {
         // GIVEN
-        MonsterLocations monsterLocations = new MonsterLocations(new TreeMap<>());
+        MonsterLocations monsterLocations = new MonsterLocations(new ConcurrentHashMap<>());
         Town townA = new Town(TOWN_A_NAME);
         Town townB = new Town(TOWN_B_NAME);
         Town townC = new Town(TOWN_C_NAME);

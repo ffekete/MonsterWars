@@ -10,6 +10,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import static org.easymock.EasyMock.anyObject;
 import static org.easymock.EasyMock.expect;
@@ -41,7 +43,7 @@ public class MonsterLocationsInitializerFacadeTest {
     @Test
     public void testInitShouldCallAllMethodsAndCreateMonstersLocations() {
         // GIVEN
-        Map<Town, List<Monster>> locations = new HashMap<>();
+        ConcurrentMap<Town, List<Monster>> locations = new ConcurrentHashMap<>();
         Town townA = new Town(TOWN_A_NAME);
         Town townB = new Town(TOWN_B_NAME);
         Town townC = new Town(TOWN_C_NAME);

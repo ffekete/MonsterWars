@@ -4,13 +4,13 @@ package monsterwars.monster.factory;
 import monsterwars.monster.Monster;
 import monsterwars.worldmap.data.Town;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class LocationsFactory {
 
-    public Map<Town, List<Monster>> create() {
-        return new HashMap<>();
+    public ConcurrentMap<Town, List<Monster>> create() {
+        return new ConcurrentHashMap<>();
     }
 }

@@ -13,9 +13,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import static org.easymock.EasyMock.expect;
 import static org.testng.Assert.assertEquals;
@@ -61,7 +61,7 @@ public class MonsterDeployerTest {
         Town townA = new Town(TOWN_A_NAME);
         Town townB = new Town(TOWN_B_NAME);
         Town townC = new Town(TOWN_C_NAME);
-        Map<Town, List<Monster>> locationsMap = new HashMap<>();
+        ConcurrentMap<Town, List<Monster>> locationsMap = new ConcurrentHashMap<>();
         locationsMap.put(townA, new ArrayList<>());
         locationsMap.put(townB, new ArrayList<>());
         locationsMap.put(townC, new ArrayList<>());

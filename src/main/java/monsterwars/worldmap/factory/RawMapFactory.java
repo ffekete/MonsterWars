@@ -5,10 +5,12 @@ import monsterwars.worldmap.data.Town;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 public class RawMapFactory {
 
-    public Map<Town, Map<Directions, Town>> create() {
-        return new HashMap<>();
+    public ConcurrentMap<Town, ConcurrentMap<Directions, Town>> create() {
+        return new ConcurrentHashMap<>();
     }
 }

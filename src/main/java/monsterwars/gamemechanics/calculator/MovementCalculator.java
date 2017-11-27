@@ -1,4 +1,4 @@
-package monsterwars.gamemechanics;
+package monsterwars.gamemechanics.calculator;
 
 import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterLocations;

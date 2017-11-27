@@ -2,6 +2,7 @@ package monsterwars.gamemechanics.calculator;
 
 import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterContainer;
+import monsterwars.monster.MonsterLocations;
 import monsterwars.monster.factory.MonsterListFactory;
 import monsterwars.worldmap.WorldMap;
 import monsterwars.worldmap.data.Town;
@@ -16,6 +17,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static org.easymock.EasyMock.expect;
 import static org.testng.Assert.assertEquals;
@@ -59,7 +61,7 @@ public class MonsterFightCalculatorTest {
         monsterContainer.addMonster(monster3);
         control.replay();
         // WHEN
-        List<Monster> result = underTest.calculate(listOfMonsters, new Town("a"), new WorldMap(new HashMap<>()), new HashMap<>());
+        List<Monster> result = underTest.calculate(new Town("a"), new WorldMap(new ConcurrentHashMap<>()), new MonsterLocations(new ConcurrentHashMap<>()));
         // THEN
         control.verify();
         assertTrue(emptyList.equals(result));
@@ -71,7 +73,7 @@ public class MonsterFightCalculatorTest {
         // GIVEN
         List<Monster> listOfMonsters = Collections.singletonList(monster);
         // WHEN
-        List<Monster> result = underTest.calculate(listOfMonsters, new Town("a"), new WorldMap(new HashMap<>()), new HashMap<>());
+        List<Monster> result = underTest.calculate(new Town("a"), new WorldMap(new ConcurrentHashMap<>()), new MonsterLocations(new ConcurrentHashMap<>()));
         // THEN
         assertTrue(result.equals(listOfMonsters));
     }

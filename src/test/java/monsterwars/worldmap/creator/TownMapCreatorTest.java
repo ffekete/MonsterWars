@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentMap;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNull;
@@ -27,7 +28,7 @@ public class TownMapCreatorTest {
         Town b = new Town("B");
         Town c = new Town("C");
         //WHEN
-        Map<Town, Map<Directions, Town>> map = underTest.createFrom(rawMap);
+        ConcurrentMap<Town, ConcurrentMap<Directions, Town>> map = underTest.createFrom(rawMap);
         // THEN
         assertEquals(map.get(a).get(Directions.NORTH).getName(), "B");
         assertEquals(map.get(b).get(Directions.SOUTH).getName(), "A");
@@ -45,7 +46,7 @@ public class TownMapCreatorTest {
         Town b = new Town("B");
         Town c = new Town("C");
         //WHEN
-        Map<Town, Map<Directions, Town>> map = underTest.createFrom(rawMap);
+        ConcurrentMap<Town, ConcurrentMap<Directions, Town>> map = underTest.createFrom(rawMap);
         // THEN
         assertEquals(map.get(a).get(Directions.NORTH).getName(), "B");
         assertNull(map.get(b).get(Directions.SOUTH));

@@ -27,18 +27,16 @@ public class Main {
         MonsterLocationsInitializerFacade monsterLocationsInitializerFacade = injector.getInstance(MonsterLocationsInitializerFacade.class);
         GameRunner gameRunner = injector.getInstance(GameRunner.class);
         MonsterContainer monsterContainer = injector.getInstance(MonsterContainer.class);
-
         WorldMap worldMap = worldMapInitializerFacade.init();
         MonsterLocations monsterLocations = monsterLocationsInitializerFacade.init(1000L, worldMap.getMap().keySet());
-
         gameRunner.runWith(worldMap, monsterLocations, monsterContainer);
-
-        monsterLocations.getTowns().forEach(town -> {
+        worldMap.getMap().keySet().forEach(town -> {
             System.out.print(town.getName() + " ");
             worldMap.getMap().get(town).forEach((directions, town1) -> System.out.print(directions.getName() + ": " + town1.getName() + " "));
             System.out.println("");
         });
-
+        System.out.println(worldMap.getMap().keySet().size());
+        System.out.println(monsterLocations.getTowns().size());
         LocalDateTime endTime = LocalDateTime.now();
         System.out.println("Ms: " + time.until(endTime, ChronoUnit.MILLIS));
     }

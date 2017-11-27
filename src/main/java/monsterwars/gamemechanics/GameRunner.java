@@ -2,6 +2,7 @@ package monsterwars.gamemechanics;
 
 import com.google.inject.Inject;
 import monsterwars.gamemechanics.calculator.MonsterFightCalculator;
+import monsterwars.gamemechanics.calculator.MovementCalculator;
 import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterContainer;
 import monsterwars.monster.MonsterLocations;
@@ -22,16 +23,32 @@ public class GameRunner {
     }
 
     public void runWith(WorldMap worldMap, MonsterLocations monsterLocations, MonsterContainer monsterContainer) {
-        for(int i = 0; i < 10000; i++) {
-            if(monsterContainer.getNumberOfMonsters() < 2) break;
+        int i;
+        for(i = 0; i < 10000 && !isNoneLeftToFight(monsterContainer); i++) {
             monsterLocations.getTowns().forEach(town -> {
-                List<Monster> newList = monsterFightCalculator.calculate(monsterLocations.getListOfMonsters(town), town, worldMap, worldMap.getMap().get(town));
+                List<Monster> newList = monsterFightCalculator.calculate(town, worldMap, monsterLocations);
                 monsterLocations.addMonstersToTown(town, newList);
-            });
-            monsterContainer.getContainerAsStream().forEach(monster -> {
-                Town townWherMonsterStays = monsterLocations.getTowns().stream().filter(town -> monsterLocations.getListOfMonsters(town).contains(monster)).findFirst().get();
-                movementCalculator.moveMonster(monster, townWherMonsterStays, worldMap.getMap().get(townWherMonsterStays), monsterLocations);
+                if(isOneMonsterInTown(newList))
+                    moveThatMonsterToANewTown(worldMap, monsterLocations, town, newList);
             });
         }
+        if(i == 10000) {
+            System.out.println("No more movement remains.");
+        } else {
+            System.out.println("No more monsters remain: " + monsterContainer.getNumberOfMonsters());
+        }
+
+    }
+
+    private boolean isNoneLeftToFight(MonsterContainer monsterContainer) {
+        return monsterContainer.getNumberOfMonsters() < 2;
+    }
+
+    private void moveThatMonsterToANewTown(WorldMap worldMap, MonsterLocations monsterLocations, Town town, List<Monster> newList) {
+        movementCalculator.moveMonster(newList.get(0), town, worldMap.getMap().get(town), monsterLocations);
+    }
+
+    private boolean isOneMonsterInTown(List<Monster> newList) {
+        return newList.size() == 1;
     }
 }
