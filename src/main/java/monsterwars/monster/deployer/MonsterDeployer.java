@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Deploys {@link Monster}s in {@link MonsterLocations}.
+ */
 @Singleton
 public class MonsterDeployer {
 
@@ -25,16 +28,25 @@ public class MonsterDeployer {
         this.monsterPlacementStrategy = monsterPlacementStrategy;
     }
 
+    /**
+     * Deploys all monsters.
+     * @param numberOfMonsters how many monsters to deploy?
+     * @param locations possible locations to deploy.
+     * @param monsterContainer list of monsters.
+     */
     public void deployAll(Long numberOfMonsters, MonsterLocations locations, MonsterContainer monsterContainer) {
-        final Set<Town> towns = locations.getTowns();
-        int numberOfTowns = getNumberOfTowns(towns);
-        List<Town> listOfTowns = convertSetOfTownsToList(towns);
+        int numberOfTowns = getNumberOfTowns(getPossibleTowns(locations));
+        List<Town> listOfTowns = convertSetOfTownsToList(getPossibleTowns(locations));
         for (int i = 0; i < numberOfMonsters; i++) {
             Monster monster = createMonster(i);
             monsterContainer.addMonster(monster);
             int itemIndex = monsterPlacementStrategy.getIndex(numberOfTowns);
             getMonstersList(locations, listOfTowns, itemIndex).add(monster);
         }
+    }
+
+    private Set<Town> getPossibleTowns(MonsterLocations locations) {
+        return locations.getTowns();
     }
 
     private int getNumberOfTowns(Set<Town> towns) {

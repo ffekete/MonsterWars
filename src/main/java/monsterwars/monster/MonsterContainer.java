@@ -29,7 +29,7 @@ public class MonsterContainer {
 
     /**
      * Adds a monster to the list.
-     * @param monster
+     * @param monster to add.
      */
     public void addMonster(final Monster monster) {
         monsterList.add(monster);
