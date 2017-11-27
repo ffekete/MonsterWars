@@ -1,6 +1,7 @@
 package monsterwars.monster.initializer;
 
 import monsterwars.monster.MonsterLocations;
+import monsterwars.monster.factory.LocationsFactory;
 import monsterwars.monster.factory.MonsterListFactory;
 import monsterwars.worldmap.data.Town;
 import org.easymock.EasyMock;
@@ -14,6 +15,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import static org.easymock.EasyMock.expect;
 import static org.testng.Assert.assertEquals;
 
+/**
+ * Unit tests for {@link LocationsInitializer}.
+ */
 public class LocationsInitializerTest {
 
     private static final int NUMBER_OF_TOWNS = 3;

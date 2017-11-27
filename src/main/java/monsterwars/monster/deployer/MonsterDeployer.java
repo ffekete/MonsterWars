@@ -28,7 +28,7 @@ public class MonsterDeployer {
     public void deployAll(final Long numberOfMonsters, final MonsterLocations locations, final MonsterContainer monsterContainer) {
         final Set<Town> towns = locations.getTowns();
         int numberOfTowns = getNumberOfTowns(towns);
-        ArrayList<Town> listOfTowns = convertSetOfTownsToList(towns);
+        List<Town> listOfTowns = convertSetOfTownsToList(towns);
         for (int i = 0; i < numberOfMonsters; i++) {
             Monster monster = createMonster(i);
             monsterContainer.addMonster(monster);
@@ -41,7 +41,7 @@ public class MonsterDeployer {
         return towns.size();
     }
 
-    private List<Monster> getMonstersList(MonsterLocations locations, ArrayList<Town> listOfTowns, int itemIndex) {
+    private List<Monster> getMonstersList(MonsterLocations locations, List<Town> listOfTowns, int itemIndex) {
         return locations.getListOfMonsters(listOfTowns.get(itemIndex));
     }
 

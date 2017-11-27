@@ -3,6 +3,7 @@ package monsterwars.gamemechanics.calculator;
 import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterContainer;
 import monsterwars.monster.MonsterLocations;
+import monsterwars.monster.factory.LocationsFactory;
 import monsterwars.monster.factory.MonsterListFactory;
 import monsterwars.worldmap.WorldMap;
 import monsterwars.worldmap.data.Town;

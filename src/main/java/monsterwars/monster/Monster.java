@@ -1,5 +1,8 @@
 package monsterwars.monster;
 
+/**
+ * POJO for storing monster data.
+ */
 public final class Monster {
 
     private final String name;
