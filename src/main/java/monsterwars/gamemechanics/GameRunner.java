@@ -23,6 +23,11 @@ public class GameRunner {
         this.movementCalculator = movementCalculator;
     }
 
+    /**
+     * Runs game rules periodically.
+     * @param worldMap where monsters may roam.
+     * @param monsterLocations map of towns where monsters reside.
+     */
     public void runWith(WorldMap worldMap, MonsterLocations monsterLocations) {
         int i;
         for (i = 0; i < MAX_NUMBER_OF_STEPS && areThereMonstersStillAlive(monsterLocations); i++) {

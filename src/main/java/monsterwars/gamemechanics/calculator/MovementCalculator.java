@@ -11,7 +11,7 @@ import java.util.Random;
 import java.util.Set;
 
 /**
- * Calculates {@Monster} movements on map.
+ * Calculates {@link Monster} movements on map.
  */
 public class MovementCalculator {
 
@@ -20,7 +20,7 @@ public class MovementCalculator {
      * @param monster to move.
      * @param actualTown where is the monster now?
      * @param possibleDirections where can the monster move?
-     * @param monsterLocations
+     * @param monsterLocations Storage where towns are linked with monsters.
      */
     public void moveMonster(Monster monster, Town actualTown, Map<Directions, Town> possibleDirections, MonsterLocations monsterLocations) {
         Directions directionToMove = getRandomDirectionToMove(possibleDirections);

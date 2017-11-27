@@ -34,7 +34,7 @@ public class MonsterFightCalculator {
     }
 
     private void printTownDestroyedMessage(Town town, WorldMap worldMap) {
-        System.out.println("Town " + town.getName() + " destroyed! " + worldMap.getMap().containsKey(town));
+        System.out.println("Town " + town.getName() + " destroyed!");
     }
 
     private void destroyTown(Town town, WorldMap worldMap) {
