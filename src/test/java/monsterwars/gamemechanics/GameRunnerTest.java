@@ -30,6 +30,7 @@ public class GameRunnerTest {
     private static final String MONSTER_A_NAME = "A";
     private static final String MONSTER_C_NAME = "B";
     private static final String MONSTER_B_NAME = "C";
+
     private final IMocksControl control = EasyMock.createControl();
 
     private MonsterFightCalculator monsterFightCalculator;
