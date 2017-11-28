@@ -1,7 +1,8 @@
 package monsterwars.worldmap.facade;
 
+import monsterwars.worldmap.inverter.DirectionsInverter;
 import monsterwars.worldmap.WorldMap;
-import monsterwars.worldmap.WorldMapBuilder;
+import monsterwars.worldmap.WorldMapCreator;
 import monsterwars.worldmap.reader.WorldMapFileReader;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
@@ -22,17 +23,19 @@ import static org.testng.Assert.assertEquals;
  */
 public class WorldMapInitializerFacadeTest {
 
+    private static final String FILE_NAME = "map.txt";
+
     private final IMocksControl control = EasyMock.createControl();
 
-    private WorldMapBuilder worldMapBuilder;
+    private WorldMapCreator worldMapCreator;
     private WorldMapFileReader worldMapFileReader;
     private WorldMapInitializerFacade underTest;
 
     @BeforeClass
     public void setUp() {
-        worldMapBuilder = control.createMock(WorldMapBuilder.class);
+        worldMapCreator = control.createMock(WorldMapCreator.class);
         worldMapFileReader = control.createMock(WorldMapFileReader.class);
-        underTest = new WorldMapInitializerFacade(worldMapBuilder, worldMapFileReader);
+        underTest = new WorldMapInitializerFacade(worldMapCreator, worldMapFileReader);
     }
 
     @BeforeMethod
@@ -44,9 +47,9 @@ public class WorldMapInitializerFacadeTest {
     public void testInitShouldReadFileAndBuildWorldWhenInputIsSupplied() throws IOException {
         // GIVEN
         Set<String> rawData = new TreeSet<>();
-        WorldMap worldMap = new WorldMap(new ConcurrentHashMap<>());
-        expect(worldMapFileReader.read("map.txt")).andReturn(rawData);
-        expect(worldMapBuilder.build(rawData)).andReturn(worldMap);
+        WorldMap worldMap = new WorldMap(new ConcurrentHashMap<>(), new DirectionsInverter());
+        expect(worldMapFileReader.read(FILE_NAME)).andReturn(rawData);
+        expect(worldMapCreator.create(rawData)).andReturn(worldMap);
         control.replay();
         // WHEN
         WorldMap result = underTest.init();
@@ -58,7 +61,7 @@ public class WorldMapInitializerFacadeTest {
     @Test(expectedExceptions = IOException.class)
     public void testInitShouldThrowExceptionWhenFileReaderThrowsException() throws IOException {
         // GIVEN
-        expect(worldMapFileReader.read("map.txt")).andThrow(new IOException());
+        expect(worldMapFileReader.read(FILE_NAME)).andThrow(new IOException());
         control.replay();
         // WHEN
         underTest.init();

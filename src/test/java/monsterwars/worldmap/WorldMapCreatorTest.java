@@ -17,19 +17,19 @@ import static org.easymock.EasyMock.expect;
 import static org.testng.Assert.assertEquals;
 
 /**
- * Unit tests for {@link WorldMapBuilder}.
+ * Unit tests for {@link WorldMapCreator}.
  */
-public class WorldMapBuilderTest {
+public class WorldMapCreatorTest {
 
     private final IMocksControl control = EasyMock.createControl();
 
     private TownMapCreator townMapCreator;
-    private WorldMapBuilder underTest;
+    private WorldMapCreator underTest;
 
     @BeforeClass
     public void setUp() {
         townMapCreator = control.createMock(TownMapCreator.class);
-        underTest = new WorldMapBuilder(townMapCreator);
+        underTest = new WorldMapCreator(townMapCreator);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class WorldMapBuilderTest {
         expect(townMapCreator.createFrom(rawData)).andReturn(emptyMap);
         control.replay();
         // WHEN
-        WorldMap result = underTest.build(rawData);
+        WorldMap result = underTest.create(rawData);
         // THEN
         control.verify();
         assertEquals(result.getMap(), emptyMap);

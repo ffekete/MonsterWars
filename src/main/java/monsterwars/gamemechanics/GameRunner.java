@@ -38,11 +38,10 @@ public class GameRunner {
             monsterLocations.getTowns().forEach(town -> {
                 fightMonstersInTown(worldMap, monsterLocations, town);
                 List<Monster> monstersInTown = monsterLocations.getListOfMonsters(town);
-                if (isOneMonsterInTown(monstersInTown)) {
-                    moveThatMonsterToANewTown(worldMap, monsterLocations, town, monstersInTown);
-                }
+                moveMonsterToANewTown(worldMap, monsterLocations, town, monstersInTown);
             });
         }
+
     }
 
     private void fightMonstersInTown(WorldMap worldMap, MonsterLocations monsterLocations, Town town) {
@@ -53,8 +52,10 @@ public class GameRunner {
         return monsterLocations.getTowns().stream().mapToInt(town -> monsterLocations.getListOfMonsters(town).size()).sum() >= 2;
     }
 
-    private void moveThatMonsterToANewTown(WorldMap worldMap, MonsterLocations monsterLocations, Town town, List<Monster> newList) {
-        movementCalculator.moveMonster(newList.get(0), town, worldMap.getMap().get(town), monsterLocations);
+    private void moveMonsterToANewTown(WorldMap worldMap, MonsterLocations monsterLocations, Town town, List<Monster> monstersInTown) {
+        if (isOneMonsterInTown(monstersInTown)) {
+            movementCalculator.moveMonster(monstersInTown.get(0), town, worldMap.getMap().get(town), monsterLocations);
+        }
     }
 
     private boolean isOneMonsterInTown(List<Monster> monsters) {

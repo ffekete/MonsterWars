@@ -1,7 +1,6 @@
 package monsterwars.monster.initializer;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterLocations;
 import monsterwars.monster.factory.MonsterListFactory;
@@ -10,7 +9,9 @@ import monsterwars.worldmap.data.Town;
 import java.util.List;
 import java.util.Set;
 
-@Singleton
+/**
+ * Used for initializing {@link MonsterLocations}.
+ */
 public class LocationsInitializer {
 
     private final MonsterListFactory monsterListFactory;
@@ -20,6 +21,12 @@ public class LocationsInitializer {
         this.monsterListFactory = monsterListFactory;
     }
 
+    /**
+     * Initializes {@link MonsterLocations}.
+     *
+     * @param locations to initialize.
+     * @param towns     set of towns where monsters may roam.
+     */
     public void initialize(MonsterLocations locations, final Set<Town> towns) {
         towns.forEach(town -> locations.setMonstersListToTown(town, getEmptyListOfMonsters()));
     }

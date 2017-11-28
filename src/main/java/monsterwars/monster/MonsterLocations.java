@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
+/**
+ * Storing locations of Monsters.
+ */
 public class MonsterLocations {
 
     private ConcurrentMap<Town, List<Monster>> locations;
@@ -33,9 +36,4 @@ public class MonsterLocations {
     public Set<Town> getTowns() {
         return locations.keySet();
     }
-
-    public void removeTown(Town town) {
-        locations.remove(town);
-    }
-
 }

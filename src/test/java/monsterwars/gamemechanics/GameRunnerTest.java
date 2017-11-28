@@ -4,6 +4,7 @@ import monsterwars.gamemechanics.calculator.MonsterFightCalculator;
 import monsterwars.gamemechanics.calculator.MovementCalculator;
 import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterLocations;
+import monsterwars.worldmap.inverter.DirectionsInverter;
 import monsterwars.worldmap.WorldMap;
 import monsterwars.worldmap.data.Town;
 import org.easymock.EasyMock;
@@ -47,7 +48,7 @@ public class GameRunnerTest {
         // GIVEN
         Town townA = new Town(TOWN_A_NAME);
         Town townB = new Town(TOWN_B_NAME);
-        WorldMap worldMap = new WorldMap(new ConcurrentHashMap<>());
+        WorldMap worldMap = new WorldMap(new ConcurrentHashMap<>(), new DirectionsInverter());
         Monster monsterA = new Monster(MONSTER_A_NAME);
         Monster monsterB = new Monster(MONSTER_B_NAME);
         Monster monsterC = new Monster(MONSTER_C_NAME);

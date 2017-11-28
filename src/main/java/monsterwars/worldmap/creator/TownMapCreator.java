@@ -24,7 +24,7 @@ public class TownMapCreator {
     private final TownFactory townFactory;
 
     @Inject
-    public TownMapCreator(final RawMapFactory rawMapFactory, TownDirectionsMapFactory townDirectionsMapFactory, TownFactory townFactory) {
+    public TownMapCreator(final RawMapFactory rawMapFactory, final TownDirectionsMapFactory townDirectionsMapFactory, final TownFactory townFactory) {
         this.rawMapFactory = rawMapFactory;
         this.townDirectionsMapFactory = townDirectionsMapFactory;
         this.townFactory = townFactory;

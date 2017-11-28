@@ -8,6 +8,9 @@ import monsterwars.worldmap.data.Town;
 
 import java.util.Set;
 
+/**
+ * Helps creating a {@link MonsterLocations} instance.
+ */
 public class MonsterLocationsInitializerFacade {
 
     private final LocationsFactory locationsFactory;
@@ -21,6 +24,13 @@ public class MonsterLocationsInitializerFacade {
         this.monsterDeployer = monsterDeployer;
     }
 
+    /**
+     * Initializes {@link MonsterLocations}.
+     *
+     * @param numberOfMonsters number of monsters to place.
+     * @param towns            possible towns where monsters may roam.
+     * @return created {@link MonsterLocations} instance.
+     */
     public MonsterLocations init(final Long numberOfMonsters, Set<Town> towns) {
         MonsterLocations locations = new MonsterLocations(locationsFactory.create());
         locationsInitializer.initialize(locations, towns);

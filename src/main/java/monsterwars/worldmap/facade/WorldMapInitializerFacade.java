@@ -2,7 +2,7 @@ package monsterwars.worldmap.facade;
 
 import com.google.inject.Inject;
 import monsterwars.worldmap.WorldMap;
-import monsterwars.worldmap.WorldMapBuilder;
+import monsterwars.worldmap.WorldMapCreator;
 import monsterwars.worldmap.reader.WorldMapFileReader;
 
 import java.io.IOException;
@@ -13,12 +13,12 @@ import java.util.Set;
  */
 public class WorldMapInitializerFacade {
 
-    private final WorldMapBuilder worldMapBuilder;
+    private final WorldMapCreator worldMapCreator;
     private final WorldMapFileReader worldMapFileReader;
 
     @Inject
-    public WorldMapInitializerFacade(WorldMapBuilder worldMapBuilder, WorldMapFileReader worldMapFileReader) {
-        this.worldMapBuilder = worldMapBuilder;
+    public WorldMapInitializerFacade(WorldMapCreator worldMapCreator, WorldMapFileReader worldMapFileReader) {
+        this.worldMapCreator = worldMapCreator;
         this.worldMapFileReader = worldMapFileReader;
     }
 
@@ -40,6 +40,6 @@ public class WorldMapInitializerFacade {
     }
 
     private WorldMap buildWorldMap(Set<String> rawData) {
-        return worldMapBuilder.build(rawData);
+        return worldMapCreator.create(rawData);
     }
 }
