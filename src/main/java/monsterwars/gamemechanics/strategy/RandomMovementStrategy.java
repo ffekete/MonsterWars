@@ -14,8 +14,12 @@ public class RandomMovementStrategy implements MovementStrategy {
 
     @Override
     public Directions getDirection(Map<Directions, Town> possibleDirections) {
-        int index = getRandomIndex(possibleDirections);
-        return getDirection(possibleDirections, index);
+        if(possibleDirections.size() > 0) {
+            int index = getRandomIndex(possibleDirections);
+            return getDirection(possibleDirections, index);
+        } else {
+            return null;
+        }
     }
 
     private int getRandomIndex(Map<Directions, Town> possibleDirections) {

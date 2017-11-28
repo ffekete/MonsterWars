@@ -7,10 +7,7 @@ import monsterwars.monster.MonsterLocations;
 import monsterwars.worldmap.data.Directions;
 import monsterwars.worldmap.data.Town;
 
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.Random;
-import java.util.Set;
 
 /**
  * Calculates {@link Monster} movements on map.
@@ -34,8 +31,10 @@ public class MovementCalculator {
      */
     public void moveMonster(Monster monster, Town actualTown, Map<Directions, Town> possibleDirections, MonsterLocations monsterLocations) {
         Directions directionToMove = getRandomDirectionToMove(possibleDirections);
-        monsterLocations.addMonsterToTown(getDestinationTown(possibleDirections, directionToMove), monster);
-        monsterLocations.removeMonsterFromTown(actualTown, monster);
+        if (directionToMove != null) {
+            monsterLocations.addMonsterToTown(getDestinationTown(possibleDirections, directionToMove), monster);
+            monsterLocations.removeMonsterFromTown(actualTown, monster);
+        }
     }
 
     private Town getDestinationTown(Map<Directions, Town> possibleDirections, Directions directionToMove) {
