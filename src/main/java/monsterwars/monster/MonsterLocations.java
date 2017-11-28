@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class MonsterLocations {
 
-    private ConcurrentMap<String, List<Monster>> locations;
+    private final ConcurrentMap<String, List<Monster>> locations;
 
     public MonsterLocations(final ConcurrentMap<String, List<Monster>> locations) {
         this.locations = locations;

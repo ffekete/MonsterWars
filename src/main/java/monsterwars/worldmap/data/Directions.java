@@ -9,7 +9,7 @@ public enum Directions {
     EAST("east"),
     WEST("west");
 
-    private String name;
+    private final String name;
 
     Directions(final String name) {
         this.name = name;

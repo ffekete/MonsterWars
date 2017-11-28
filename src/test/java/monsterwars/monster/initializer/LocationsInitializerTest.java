@@ -41,10 +41,7 @@ public class LocationsInitializerTest {
     public void testShouldInitializeMapWithEmptyListOfMonstersForAllTowns() {
         // GIVEN
         MonsterLocations monsterLocations = new MonsterLocations(new ConcurrentHashMap<>());
-        String townA = TOWN_A_NAME;
-        String townB = TOWN_B_NAME;
-        String townC = TOWN_C_NAME;
-        Set<String> towns = new TreeSet<>(Arrays.asList(townA, townB, townC));
+        Set<String> towns = new TreeSet<>(Arrays.asList(TOWN_A_NAME, TOWN_B_NAME, TOWN_C_NAME));
         expect(monsterListFactory.createEmpty()).andReturn(Collections.emptyList()).times(NUMBER_OF_TOWNS);
         control.replay();
         // WHEN

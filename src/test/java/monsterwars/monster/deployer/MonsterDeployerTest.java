@@ -17,6 +17,9 @@ import java.util.concurrent.ConcurrentMap;
 import static org.easymock.EasyMock.expect;
 import static org.testng.Assert.assertEquals;
 
+/**
+ * Unit tests for {@link MonsterDeployer}.
+ */
 public class MonsterDeployerTest {
 
     private static final int NUMBER_OF_TOWNS = 3;
@@ -55,13 +58,10 @@ public class MonsterDeployerTest {
         expect(monsterPlacementStrategy.getIndex(NUMBER_OF_TOWNS)).andReturn(SECOND_INDEX_OF_TOWN);
         expect(monsterFactory.create(2)).andReturn(monster2);
         expect(monsterPlacementStrategy.getIndex(NUMBER_OF_TOWNS)).andReturn(SECOND_INDEX_OF_TOWN);
-        String townA = TOWN_A_NAME;
-        String townB = TOWN_B_NAME;
-        String townC = TOWN_C_NAME;
         ConcurrentMap<String, List<Monster>> locationsMap = new ConcurrentHashMap<>();
-        locationsMap.put(townA, new ArrayList<>());
-        locationsMap.put(townB, new ArrayList<>());
-        locationsMap.put(townC, new ArrayList<>());
+        locationsMap.put(TOWN_A_NAME, new ArrayList<>());
+        locationsMap.put(TOWN_B_NAME, new ArrayList<>());
+        locationsMap.put(TOWN_C_NAME, new ArrayList<>());
         MonsterLocations monsterLocations = new MonsterLocations(locationsMap);
         control.replay();
         // WHEN

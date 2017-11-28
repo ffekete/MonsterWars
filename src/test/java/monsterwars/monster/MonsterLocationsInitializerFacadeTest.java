@@ -44,10 +44,7 @@ public class MonsterLocationsInitializerFacadeTest {
     public void testInitShouldCallAllMethodsAndCreateMonstersLocations() {
         // GIVEN
         ConcurrentMap<String, List<Monster>> locations = new ConcurrentHashMap<>();
-        String townA = TOWN_A_NAME;
-        String townB = TOWN_B_NAME;
-        String townC = TOWN_C_NAME;
-        Set<String> towns = new TreeSet<>(Arrays.asList(townA, townB, townC));
+        Set<String> towns = new TreeSet<>(Arrays.asList(TOWN_A_NAME, TOWN_B_NAME, TOWN_C_NAME));
         expect(locationsFactory.create()).andReturn(locations);
         locationsInitializer.initialize(anyObject(), anyObject());
         monsterDeployer.deployAll(anyObject(), anyObject());
