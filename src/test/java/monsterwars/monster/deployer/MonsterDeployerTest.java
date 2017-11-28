@@ -10,9 +10,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.Map;
 
 import static org.easymock.EasyMock.expect;
 import static org.testng.Assert.assertEquals;
@@ -58,7 +58,7 @@ public class MonsterDeployerTest {
         expect(monsterPlacementStrategy.getIndex(NUMBER_OF_TOWNS)).andReturn(SECOND_INDEX_OF_TOWN);
         expect(monsterFactory.create(2)).andReturn(monster2);
         expect(monsterPlacementStrategy.getIndex(NUMBER_OF_TOWNS)).andReturn(SECOND_INDEX_OF_TOWN);
-        ConcurrentMap<String, List<Monster>> locationsMap = new ConcurrentHashMap<>();
+        Map<String, List<Monster>> locationsMap = new HashMap<>();
         locationsMap.put(TOWN_A_NAME, new ArrayList<>());
         locationsMap.put(TOWN_B_NAME, new ArrayList<>());
         locationsMap.put(TOWN_C_NAME, new ArrayList<>());
@@ -68,13 +68,13 @@ public class MonsterDeployerTest {
         underTest.deployAll(NUMBER_OF_MONSTERS, monsterLocations);
         // THEN
         control.verify();
-        int actualNumberOfMonsters = monsterLocations.getTowns().stream().mapToInt(town -> monsterLocations.getListOfMonsters(town).size()).sum();
+        int actualNumberOfMonsters = monsterLocations.getTowns().parallelStream().mapToInt(town -> monsterLocations.getListOfMonsters(town).size()).sum();
         assertEquals(Integer.valueOf(actualNumberOfMonsters), NUMBER_OF_MONSTERS);
-        long nrOfTownsWithTwoMonsters = monsterLocations.getTowns().stream().filter(town -> monsterLocations.getListOfMonsters(town).size() == 2).count();
+        long nrOfTownsWithTwoMonsters = monsterLocations.getTowns().parallelStream().filter(town -> monsterLocations.getListOfMonsters(town).size() == 2).count();
         assertEquals(nrOfTownsWithTwoMonsters, 1);
-        long nrOfTownsWithOneMonsters = monsterLocations.getTowns().stream().filter(town -> monsterLocations.getListOfMonsters(town).size() == 1).count();
+        long nrOfTownsWithOneMonsters = monsterLocations.getTowns().parallelStream().filter(town -> monsterLocations.getListOfMonsters(town).size() == 1).count();
         assertEquals(nrOfTownsWithOneMonsters, 1);
-        long nrOfTownsWithZeroMonsters = monsterLocations.getTowns().stream().filter(town -> monsterLocations.getListOfMonsters(town).size() == 0).count();
+        long nrOfTownsWithZeroMonsters = monsterLocations.getTowns().parallelStream().filter(town -> monsterLocations.getListOfMonsters(town).size() == 0).count();
         assertEquals(nrOfTownsWithZeroMonsters, 1);
     }
 

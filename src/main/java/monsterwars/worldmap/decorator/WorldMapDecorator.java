@@ -17,9 +17,9 @@ public class WorldMapDecorator {
      * Prints the remaining towns in the world.
      */
     public void printRemainingWorldMap() {
-        worldMap.getMap().keySet().forEach(town -> {
+        worldMap.getMap().forEach((town, map) -> {
             System.out.print(town + " ");
-            worldMap.getMap().get(town).forEach((directions, town1) -> System.out.print(directions.getName() + ": " + town1 + " "));
+            map.forEach((directions, town1) -> System.out.print(directions.getName() + ": " + town1 + " "));
             System.out.println("");
         });
     }

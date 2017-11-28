@@ -3,22 +3,22 @@ package monsterwars.worldmap;
 import monsterwars.worldmap.data.Directions;
 import monsterwars.worldmap.inverter.DirectionsInverter;
 
-import java.util.concurrent.ConcurrentMap;
+import java.util.Map;
 
 /**
  * Simple pojo for storing worldmap.
  */
 public class WorldMap {
 
-    private final ConcurrentMap<String, ConcurrentMap<Directions, String>> map;
+    private final Map<String, Map<Directions, String>> map;
     private final DirectionsInverter directionsInverter;
 
-    public WorldMap(ConcurrentMap<String, ConcurrentMap<Directions, String>> map, DirectionsInverter directionsInverter) {
+    public WorldMap(Map<String, Map<Directions, String>> map, DirectionsInverter directionsInverter) {
         this.map = map;
         this.directionsInverter = directionsInverter;
     }
 
-    public ConcurrentMap<String, ConcurrentMap<Directions, String>> getMap() {
+    public Map<String, Map<Directions, String>> getMap() {
         return map;
     }
 
@@ -28,9 +28,8 @@ public class WorldMap {
      * @param town to remove.
      */
     public void removeTownFromWorldMap(String town) {
-        map.get(town).keySet().forEach(direction -> {
-            String actualTownInDirection = map.get(town).get(direction);
-            if (actualTownInDirection != null) map.get(actualTownInDirection).remove(directionsInverter.get(direction));
+        map.get(town).forEach((direction, townInDirection) -> {
+            map.get(townInDirection).remove(directionsInverter.get(direction));
         });
         map.remove(town);
     }

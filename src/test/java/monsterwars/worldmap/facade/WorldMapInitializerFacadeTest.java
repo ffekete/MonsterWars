@@ -11,9 +11,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
 
 import static org.easymock.EasyMock.expect;
 import static org.testng.Assert.assertEquals;
@@ -47,7 +47,7 @@ public class WorldMapInitializerFacadeTest {
     public void testInitShouldReadFileAndBuildWorldWhenInputIsSupplied() throws IOException {
         // GIVEN
         Set<String> rawData = new TreeSet<>();
-        WorldMap worldMap = new WorldMap(new ConcurrentHashMap<>(), new DirectionsInverter());
+        WorldMap worldMap = new WorldMap(new HashMap<>(), new DirectionsInverter());
         expect(worldMapFileReader.read(FILE_NAME)).andReturn(rawData);
         expect(worldMapCreator.create(rawData)).andReturn(worldMap);
         control.replay();

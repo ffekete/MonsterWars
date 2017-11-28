@@ -8,10 +8,10 @@ import org.easymock.IMocksControl;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import static org.easymock.EasyMock.expect;
 import static org.testng.Assert.assertEquals;
@@ -35,7 +35,7 @@ public class WorldMapCreatorTest {
     @Test
     public void testBuildShouldBuildWorldMap() {
         // GIVEN
-        ConcurrentMap<String, ConcurrentMap<Directions, String>> emptyMap = new ConcurrentHashMap<>();
+        Map<String, Map<Directions, String>> emptyMap = new HashMap<>();
         Set<String> rawData = new TreeSet<>();
         expect(townMapCreator.createFrom(rawData)).andReturn(emptyMap);
         control.replay();

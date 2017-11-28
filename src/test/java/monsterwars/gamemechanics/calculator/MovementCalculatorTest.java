@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import static org.easymock.EasyMock.expect;
 import static org.testng.Assert.assertEquals;
@@ -57,7 +55,7 @@ public class MovementCalculatorTest {
         possibleDirections.put(Directions.SOUTH, townC);
         possibleDirections.put(Directions.EAST, townD);
         possibleDirections.put(Directions.WEST, townE);
-        ConcurrentMap<String, List<Monster>> locationsMap = new ConcurrentHashMap<>();
+        Map<String, List<Monster>> locationsMap = new HashMap<>();
         List<Monster> monstersInTownA = new ArrayList<>();
         monstersInTownA.add(monsterA);
         locationsMap.put(townA, monstersInTownA);

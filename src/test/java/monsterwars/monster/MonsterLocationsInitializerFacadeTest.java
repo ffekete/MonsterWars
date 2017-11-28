@@ -8,12 +8,7 @@ import org.easymock.IMocksControl;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.*;
 
 import static org.easymock.EasyMock.anyObject;
 import static org.easymock.EasyMock.expect;
@@ -43,7 +38,7 @@ public class MonsterLocationsInitializerFacadeTest {
     @Test
     public void testInitShouldCallAllMethodsAndCreateMonstersLocations() {
         // GIVEN
-        ConcurrentMap<String, List<Monster>> locations = new ConcurrentHashMap<>();
+        Map<String, List<Monster>> locations = new HashMap<>();
         Set<String> towns = new TreeSet<>(Arrays.asList(TOWN_A_NAME, TOWN_B_NAME, TOWN_C_NAME));
         expect(locationsFactory.create()).andReturn(locations);
         locationsInitializer.initialize(anyObject(), anyObject());

@@ -1,17 +1,17 @@
 package monsterwars.monster;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * Storing locations of Monsters.
  */
 public class MonsterLocations {
 
-    private final ConcurrentMap<String, List<Monster>> locations;
+    private final Map<String, List<Monster>> locations;
 
-    public MonsterLocations(final ConcurrentMap<String, List<Monster>> locations) {
+    public MonsterLocations(final Map<String, List<Monster>> locations) {
         this.locations = locations;
     }
 
@@ -33,5 +33,9 @@ public class MonsterLocations {
 
     public Set<String> getTowns() {
         return locations.keySet();
+    }
+
+    public Map<String, List<Monster>> getLocations() {
+        return locations;
     }
 }

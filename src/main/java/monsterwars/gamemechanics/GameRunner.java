@@ -34,10 +34,9 @@ public class GameRunner {
     public void runWith(WorldMap worldMap, MonsterLocations monsterLocations) {
         int i;
         for (i = 0; i < MAX_NUMBER_OF_STEPS && areThereMonstersStillAlive(monsterLocations); i++) {
-            monsterLocations.getTowns().forEach(town -> {
+            monsterLocations.getLocations().forEach((town, monsterList) -> {
                 fightMonstersInTown(worldMap, monsterLocations, town);
-                List<Monster> monstersInTown = monsterLocations.getListOfMonsters(town);
-                moveMonsterToANewTown(worldMap, monsterLocations, town, monstersInTown);
+                moveMonsterToANewTown(worldMap, monsterLocations, town, monsterList);
             });
         }
 
@@ -48,7 +47,7 @@ public class GameRunner {
     }
 
     private boolean areThereMonstersStillAlive(MonsterLocations monsterLocations) {
-        return monsterLocations.getTowns().stream().mapToInt(town -> monsterLocations.getListOfMonsters(town).size()).sum() >= 2;
+        return monsterLocations.getTowns().parallelStream().mapToInt(town -> monsterLocations.getListOfMonsters(town).size()).sum() >= 2;
     }
 
     private void moveMonsterToANewTown(WorldMap worldMap, MonsterLocations monsterLocations, String town, List<Monster> monstersInTown) {
