@@ -3,22 +3,22 @@ package monsterwars.worldmap;
 import monsterwars.worldmap.data.Directions;
 import monsterwars.worldmap.inverter.DirectionsInverter;
 
-import java.util.concurrent.ConcurrentMap;
+import java.util.Map;
 
 /**
  * Simple pojo for storing worldmap.
  */
 public class WorldMap {
 
-    private final ConcurrentMap<String, ConcurrentMap<Directions, String>> map;
+    private final Map<String, Map<Directions, String>> map;
     private final DirectionsInverter directionsInverter;
 
-    public WorldMap(ConcurrentMap<String, ConcurrentMap<Directions, String>> map, DirectionsInverter directionsInverter) {
+    public WorldMap(Map<String, Map<Directions, String>> map, DirectionsInverter directionsInverter) {
         this.map = map;
         this.directionsInverter = directionsInverter;
     }
 
-    public ConcurrentMap<String, ConcurrentMap<Directions, String>> getMap() {
+    public Map<String, Map<Directions, String>> getMap() {
         return map;
     }
 

@@ -7,11 +7,7 @@ import org.easymock.IMocksControl;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.*;
 
 import static org.easymock.EasyMock.expect;
 import static org.testng.Assert.assertEquals;
@@ -40,7 +36,7 @@ public class LocationsInitializerTest {
     @Test
     public void testShouldInitializeMapWithEmptyListOfMonstersForAllTowns() {
         // GIVEN
-        MonsterLocations monsterLocations = new MonsterLocations(new ConcurrentHashMap<>());
+        MonsterLocations monsterLocations = new MonsterLocations(new HashMap<>());
         Set<String> towns = new TreeSet<>(Arrays.asList(TOWN_A_NAME, TOWN_B_NAME, TOWN_C_NAME));
         expect(monsterListFactory.createEmpty()).andReturn(Collections.emptyList()).times(NUMBER_OF_TOWNS);
         control.replay();

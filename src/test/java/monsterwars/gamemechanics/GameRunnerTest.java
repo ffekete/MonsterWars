@@ -11,11 +11,7 @@ import org.easymock.IMocksControl;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.*;
 
 import static org.easymock.EasyMock.expect;
 
@@ -48,11 +44,11 @@ public class GameRunnerTest {
         // GIVEN
         String townA = TOWN_A_NAME;
         String townB = TOWN_B_NAME;
-        WorldMap worldMap = new WorldMap(new ConcurrentHashMap<>(), new DirectionsInverter());
+        WorldMap worldMap = new WorldMap(new HashMap<>(), new DirectionsInverter());
         Monster monsterA = new Monster(MONSTER_A_NAME);
         Monster monsterB = new Monster(MONSTER_B_NAME);
         Monster monsterC = new Monster(MONSTER_C_NAME);
-        ConcurrentMap<String, List<Monster>> monstersList = new ConcurrentHashMap<>();
+        Map<String, List<Monster>> monstersList = new HashMap<>();
         monstersList.put(townA, Collections.singletonList(monsterA));
         monstersList.put(townB, Arrays.asList(monsterB, monsterC));
         MonsterLocations monsterLocations = new MonsterLocations(monstersList);

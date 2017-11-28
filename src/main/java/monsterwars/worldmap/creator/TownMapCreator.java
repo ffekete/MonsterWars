@@ -5,11 +5,11 @@ import monsterwars.worldmap.data.Directions;
 import monsterwars.worldmap.factory.RawMapFactory;
 import monsterwars.worldmap.factory.TownDirectionsMapFactory;
 
+import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentMap;
 
 /**
- * Converts raw lines of Strings to {@link ConcurrentMap} content.
+ * Converts raw lines of Strings to {@link Map} content.
  */
 public class TownMapCreator {
 
@@ -26,18 +26,18 @@ public class TownMapCreator {
     }
 
     /**
-     * Creates a {@link ConcurrentMap} instance from {@link Set} raw text lines.
+     * Creates a {@link Map} instance from {@link Set} raw text lines.
      *
      * @param rawData a {@link Set} of lines.
      * @return the created map instance.
      */
-    public ConcurrentMap<String, ConcurrentMap<Directions, String>> createFrom(Set<String> rawData) {
-        ConcurrentMap<String, ConcurrentMap<Directions, String>> map = rawMapFactory.create();
+    public Map<String, Map<Directions, String>> createFrom(Set<String> rawData) {
+        Map<String, Map<Directions, String>> map = rawMapFactory.create();
         rawData.forEach(line -> fillMap(map, line));
         return map;
     }
 
-    private void fillMap(ConcurrentMap<String, ConcurrentMap<Directions, String>> map, String line) {
+    private void fillMap(Map<String, Map<Directions, String>> map, String line) {
         String[] tokens = splitLineToTokens(line, SPACE_SEPARATOR);
         String currentTown = getTownNameFromTokens(tokens);
         addTownToMapIfNeeded(map, currentTown);
@@ -72,11 +72,11 @@ public class TownMapCreator {
         return splitLineToTokens(token, EQUALS_SEPARATOR)[1];
     }
 
-    private void addTownToMapIfNeeded(ConcurrentMap<String, ConcurrentMap<Directions, String>> map, String townToLink) {
+    private void addTownToMapIfNeeded(Map<String, Map<Directions, String>> map, String townToLink) {
         map.computeIfAbsent(townToLink, k -> townDirectionsMapFactory.create());
     }
 
-    private void putTownToLinkToGivenDirection(ConcurrentMap<String, ConcurrentMap<Directions, String>> map, String currentTown, String direction, String townToLink) {
+    private void putTownToLinkToGivenDirection(Map<String, Map<Directions, String>> map, String currentTown, String direction, String townToLink) {
         map.get(currentTown).put(getTownDirection(direction), townToLink);
     }
 

@@ -3,21 +3,21 @@ package monsterwars.monster.factory;
 
 import monsterwars.monster.Monster;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.Map;
 
 /**
- * Used for creating {@link ConcurrentMap} for {@link monsterwars.monster.MonsterLocationsInitializerFacade}.
+ * Used for creating {@link Map} for {@link monsterwars.monster.MonsterLocationsInitializerFacade}.
  */
 public class LocationsFactory {
 
     /**
-     * Creates {@link ConcurrentMap} instance.
+     * Creates {@link Map} instance.
      *
      * @return created instance.
      */
-    public ConcurrentMap<String, List<Monster>> create() {
-        return new ConcurrentHashMap<>();
+    public Map<String, List<Monster>> create() {
+        return new HashMap<>();
     }
 }

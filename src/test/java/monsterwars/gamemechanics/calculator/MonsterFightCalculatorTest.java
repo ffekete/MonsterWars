@@ -11,11 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.*;
 
 import static org.easymock.EasyMock.expect;
 import static org.testng.Assert.assertTrue;
@@ -53,7 +49,7 @@ public class MonsterFightCalculatorTest {
         Monster monster1 = new Monster(MONSTER_1_NAME);
         Monster monster2 = new Monster(MONSTER_2_NAME);
         Monster monster3 = new Monster(MONSTER_3_NAME);
-        ConcurrentMap<String, List<Monster>> map = new ConcurrentHashMap<>();
+        Map<String, List<Monster>> map = new HashMap<>();
         String townA = TOWN_A_NAME;
         map.put(townA, Arrays.asList(monster1, monster2, monster3));
         WorldMap worldMap = control.createMock(WorldMap.class);
@@ -73,10 +69,10 @@ public class MonsterFightCalculatorTest {
         // GIVEN
         List<Monster> listOfMonsters = Collections.singletonList(monster);
         String townA = TOWN_A_NAME;
-        ConcurrentMap<String, List<Monster>> map = new ConcurrentHashMap<>();
+        Map<String, List<Monster>> map = new HashMap<>();
         map.put(townA, listOfMonsters);
         WorldMap worldMap = control.createMock(WorldMap.class);
-        expect(worldMap.getMap()).andReturn(new ConcurrentHashMap<>());
+        expect(worldMap.getMap()).andReturn(new HashMap<>());
         worldMap.removeTownFromWorldMap(townA);
         EasyMock.expectLastCall();
         // WHEN

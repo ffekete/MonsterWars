@@ -10,9 +10,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
+import java.util.Map;
 
 import static org.easymock.EasyMock.expect;
 import static org.testng.Assert.assertEquals;
@@ -58,7 +58,7 @@ public class MonsterDeployerTest {
         expect(monsterPlacementStrategy.getIndex(NUMBER_OF_TOWNS)).andReturn(SECOND_INDEX_OF_TOWN);
         expect(monsterFactory.create(2)).andReturn(monster2);
         expect(monsterPlacementStrategy.getIndex(NUMBER_OF_TOWNS)).andReturn(SECOND_INDEX_OF_TOWN);
-        ConcurrentMap<String, List<Monster>> locationsMap = new ConcurrentHashMap<>();
+        Map<String, List<Monster>> locationsMap = new HashMap<>();
         locationsMap.put(TOWN_A_NAME, new ArrayList<>());
         locationsMap.put(TOWN_B_NAME, new ArrayList<>());
         locationsMap.put(TOWN_C_NAME, new ArrayList<>());

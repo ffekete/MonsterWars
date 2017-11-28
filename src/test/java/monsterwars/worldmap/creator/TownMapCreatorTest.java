@@ -6,9 +6,9 @@ import monsterwars.worldmap.factory.TownDirectionsMapFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.concurrent.ConcurrentMap;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNull;
@@ -36,7 +36,7 @@ public class TownMapCreatorTest {
         String townB = "B";
         String townC = "C";
         //WHEN
-        ConcurrentMap<String, ConcurrentMap<Directions, String>> map = underTest.createFrom(rawData);
+        Map<String, Map<Directions, String>> map = underTest.createFrom(rawData);
         // THEN
         assertEquals(map.get(townA).get(Directions.NORTH), townB);
         assertEquals(map.get(townB).get(Directions.SOUTH), townA);
@@ -54,7 +54,7 @@ public class TownMapCreatorTest {
         String townB = "B";
         String townC = "C";
         //WHEN
-        ConcurrentMap<String, ConcurrentMap<Directions, String>> map = underTest.createFrom(rawMap);
+        Map<String, Map<Directions, String>> map = underTest.createFrom(rawMap);
         // THEN
         assertEquals(map.get(townA).get(Directions.NORTH), townB);
         assertNull(map.get(townB).get(Directions.SOUTH));
