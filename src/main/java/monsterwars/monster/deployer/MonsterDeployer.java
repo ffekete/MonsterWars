@@ -33,7 +33,7 @@ public class MonsterDeployer {
      * @param numberOfMonsters how many monsters to deploy?
      * @param locations        possible locations to deploy.
      */
-    public void deployAll(Long numberOfMonsters, MonsterLocations locations) {
+    public void deployAll(Integer numberOfMonsters, MonsterLocations locations) {
         int numberOfTowns = getNumberOfTowns(getPossibleTowns(locations));
         List<Town> listOfTowns = convertSetOfTownsToList(getPossibleTowns(locations));
         for (int i = 0; i < numberOfMonsters; i++) {

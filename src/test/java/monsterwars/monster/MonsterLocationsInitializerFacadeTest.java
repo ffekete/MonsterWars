@@ -24,7 +24,7 @@ public class MonsterLocationsInitializerFacadeTest {
     private static final String TOWN_A_NAME = "A";
     private static final String TOWN_B_NAME = "B";
     private static final String TOWN_C_NAME = "C";
-    private static final long NUMBER_OF_MONSTERS = 10L;
+    private static final int NUMBER_OF_MONSTERS = 10;
 
     private final IMocksControl control = EasyMock.createStrictControl();
 

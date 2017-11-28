@@ -21,7 +21,7 @@ public class Main {
         if (args.length == 0) {
             System.out.println(NO_PARAMETERS_SUPPLIED_ERROR_MESSAGE);
         } else {
-            Long numberOfMonsters = InputArgumentValidator.validate(args);
+            Integer numberOfMonsters = InputArgumentValidator.validate(args);
             if (numberOfMonsters != null && numberOfMonsters > 0) {
                 // Initializing Environment
                 Injector injector = Guice.createInjector(new MonsterModule(), new GameMechanicsModule());

@@ -31,7 +31,7 @@ public class MonsterLocationsInitializerFacade {
      * @param towns            possible towns where monsters may roam.
      * @return created {@link MonsterLocations} instance.
      */
-    public MonsterLocations init(final Long numberOfMonsters, Set<Town> towns) {
+    public MonsterLocations init(final Integer numberOfMonsters, Set<Town> towns) {
         MonsterLocations locations = new MonsterLocations(locationsFactory.create());
         locationsInitializer.initialize(locations, towns);
         monsterDeployer.deployAll(numberOfMonsters, locations);
