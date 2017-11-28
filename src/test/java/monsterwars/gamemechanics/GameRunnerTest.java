@@ -6,7 +6,6 @@ import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterLocations;
 import monsterwars.worldmap.inverter.DirectionsInverter;
 import monsterwars.worldmap.WorldMap;
-import monsterwars.worldmap.data.Town;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
 import org.testng.annotations.BeforeClass;
@@ -47,13 +46,13 @@ public class GameRunnerTest {
     @Test
     public void testRunWithShouldRunGameAndCallCalculators() {
         // GIVEN
-        Town townA = new Town(TOWN_A_NAME);
-        Town townB = new Town(TOWN_B_NAME);
+        String townA = TOWN_A_NAME;
+        String townB = TOWN_B_NAME;
         WorldMap worldMap = new WorldMap(new ConcurrentHashMap<>(), new DirectionsInverter());
         Monster monsterA = new Monster(MONSTER_A_NAME);
         Monster monsterB = new Monster(MONSTER_B_NAME);
         Monster monsterC = new Monster(MONSTER_C_NAME);
-        ConcurrentMap<Town, List<Monster>> monstersList = new ConcurrentHashMap<>();
+        ConcurrentMap<String, List<Monster>> monstersList = new ConcurrentHashMap<>();
         monstersList.put(townA, Collections.singletonList(monsterA));
         monstersList.put(townB, Arrays.asList(monsterB, monsterC));
         MonsterLocations monsterLocations = new MonsterLocations(monstersList);

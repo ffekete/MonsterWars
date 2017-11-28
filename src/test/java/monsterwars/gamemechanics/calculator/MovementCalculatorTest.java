@@ -4,7 +4,6 @@ import monsterwars.gamemechanics.strategy.MovementStrategy;
 import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterLocations;
 import monsterwars.worldmap.data.Directions;
-import monsterwars.worldmap.data.Town;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
 import org.testng.annotations.BeforeClass;
@@ -48,17 +47,17 @@ public class MovementCalculatorTest {
     public void testMoveMonsterShouldMoveAllOfThem() {
         // GIVEN
         Monster monsterA = new Monster(MONSTER_A_NAME);
-        Map<Directions, Town> possibleDirections = new HashMap<>();
-        Town townA = new Town(TOWN_A_NAME);
-        Town townB = new Town(TOWN_B_NAME);
-        Town townC = new Town(TOWN_C_NAME);
-        Town townD = new Town(TOWN_D_NAME);
-        Town townE = new Town(TOWN_E_NAME);
+        Map<Directions, String> possibleDirections = new HashMap<>();
+        String townA = TOWN_A_NAME;
+        String townB = TOWN_B_NAME;
+        String townC = TOWN_C_NAME;
+        String townD = TOWN_D_NAME;
+        String townE = TOWN_E_NAME;
         possibleDirections.put(Directions.NORTH, townB);
         possibleDirections.put(Directions.SOUTH, townC);
         possibleDirections.put(Directions.EAST, townD);
         possibleDirections.put(Directions.WEST, townE);
-        ConcurrentMap<Town, List<Monster>> locationsMap = new ConcurrentHashMap<>();
+        ConcurrentMap<String, List<Monster>> locationsMap = new ConcurrentHashMap<>();
         List<Monster> monstersInTownA = new ArrayList<>();
         monstersInTownA.add(monsterA);
         locationsMap.put(townA, monstersInTownA);

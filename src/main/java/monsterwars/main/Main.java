@@ -29,12 +29,23 @@ public class Main {
                 MonsterLocationsInitializerFacade monsterLocationsInitializerFacade = injector.getInstance(MonsterLocationsInitializerFacade.class);
                 GameRunner gameRunner = injector.getInstance(GameRunner.class);
                 // Initializing game world
+
+                long start = System.nanoTime();
                 WorldMap worldMap = worldMapInitializerFacade.init();
+                long endCreation = System.nanoTime();
+
                 MonsterLocations monsterLocations = monsterLocationsInitializerFacade.init(numberOfMonsters, worldMap.getMap().keySet());
+                long endPlacement = System.nanoTime();
                 // running game
                 gameRunner.runWith(worldMap, monsterLocations);
+                long endRun = System.nanoTime();
+
                 // cleaning up
                 new WorldMapDecorator(worldMap).printRemainingWorldMap();
+
+                System.out.println((endCreation - start) / 1000000);
+                System.out.println((endPlacement - endCreation) / 1000000);
+                System.out.println((endRun - endPlacement) / 1000000);
             }
         }
     }

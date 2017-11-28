@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import monsterwars.monster.deployer.MonsterDeployer;
 import monsterwars.monster.factory.LocationsFactory;
 import monsterwars.monster.initializer.LocationsInitializer;
-import monsterwars.worldmap.data.Town;
 
 import java.util.Set;
 
@@ -31,7 +30,7 @@ public class MonsterLocationsInitializerFacade {
      * @param towns            possible towns where monsters may roam.
      * @return created {@link MonsterLocations} instance.
      */
-    public MonsterLocations init(final Integer numberOfMonsters, Set<Town> towns) {
+    public MonsterLocations init(final Integer numberOfMonsters, Set<String> towns) {
         MonsterLocations locations = new MonsterLocations(locationsFactory.create());
         locationsInitializer.initialize(locations, towns);
         monsterDeployer.deployAll(numberOfMonsters, locations);

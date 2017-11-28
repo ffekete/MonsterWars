@@ -1,7 +1,5 @@
 package monsterwars.monster;
 
-import monsterwars.worldmap.data.Town;
-
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
@@ -11,29 +9,29 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class MonsterLocations {
 
-    private ConcurrentMap<Town, List<Monster>> locations;
+    private ConcurrentMap<String, List<Monster>> locations;
 
-    public MonsterLocations(final ConcurrentMap<Town, List<Monster>> locations) {
+    public MonsterLocations(final ConcurrentMap<String, List<Monster>> locations) {
         this.locations = locations;
     }
 
-    public List<Monster> getListOfMonsters(final Town town) {
+    public List<Monster> getListOfMonsters(final String town) {
         return locations.get(town);
     }
 
-    public void setMonstersListToTown(Town town, List<Monster> monsters) {
+    public void setMonstersListToTown(String town, List<Monster> monsters) {
         locations.put(town, monsters);
     }
 
-    public void removeMonsterFromTown(Town town, Monster monster) {
+    public void removeMonsterFromTown(String town, Monster monster) {
         locations.get(town).remove(monster);
     }
 
-    public void addMonsterToTown(Town town, Monster monster) {
+    public void addMonsterToTown(String town, Monster monster) {
         locations.get(town).add(monster);
     }
 
-    public Set<Town> getTowns() {
+    public Set<String> getTowns() {
         return locations.keySet();
     }
 }

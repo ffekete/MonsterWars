@@ -2,10 +2,8 @@ package monsterwars.worldmap.creator;
 
 import com.google.inject.Inject;
 import monsterwars.worldmap.data.Directions;
-import monsterwars.worldmap.data.Town;
 import monsterwars.worldmap.factory.RawMapFactory;
 import monsterwars.worldmap.factory.TownDirectionsMapFactory;
-import monsterwars.worldmap.factory.TownFactory;
 
 import java.util.Optional;
 import java.util.Set;
@@ -21,13 +19,11 @@ public class TownMapCreator {
 
     private final RawMapFactory rawMapFactory;
     private final TownDirectionsMapFactory townDirectionsMapFactory;
-    private final TownFactory townFactory;
 
     @Inject
-    public TownMapCreator(final RawMapFactory rawMapFactory, final TownDirectionsMapFactory townDirectionsMapFactory, final TownFactory townFactory) {
+    public TownMapCreator(final RawMapFactory rawMapFactory, final TownDirectionsMapFactory townDirectionsMapFactory) {
         this.rawMapFactory = rawMapFactory;
         this.townDirectionsMapFactory = townDirectionsMapFactory;
-        this.townFactory = townFactory;
     }
 
     /**
@@ -36,23 +32,22 @@ public class TownMapCreator {
      * @param rawData a {@link Set} of lines.
      * @return the created map instance.
      */
-    public ConcurrentMap<Town, ConcurrentMap<Directions, Town>> createFrom(Set<String> rawData) {
-        ConcurrentMap<Town, ConcurrentMap<Directions, Town>> map = rawMapFactory.create();
+    public ConcurrentMap<String, ConcurrentMap<Directions, String>> createFrom(Set<String> rawData) {
+        ConcurrentMap<String, ConcurrentMap<Directions, String>> map = rawMapFactory.create();
         rawData.forEach(line -> fillMap(map, line));
         return map;
     }
 
-    private void fillMap(ConcurrentMap<Town, ConcurrentMap<Directions, Town>> map, String line) {
+    private void fillMap(ConcurrentMap<String, ConcurrentMap<Directions, String>> map, String line) {
         String[] tokens = splitLineToTokens(line, SPACE_SEPARATOR);
-        Town currentTown = createNewTownIfDoesNotExist(getTownNameFromTokens(tokens), map);
+        String currentTown = getTownNameFromTokens(tokens);
         placeCurrentTownToMap(map, currentTown);
         for (int i = 1; i < tokens.length; i++) {
             validateToken(tokens[i]);
             String direction = getDirectionFromCurrentToken(tokens[i]);
             String nameOfTownToLink = getTownNameFromCurrentToken(tokens[i]);
-            Town townToLink = getTownToLink(nameOfTownToLink, map);
-            addLinkedTownToMapIfNeeded(map, townToLink);
-            putTownToLinkToGivenDirection(map, currentTown, direction, townToLink);
+            addLinkedTownToMapIfNeeded(map, nameOfTownToLink);
+            putTownToLinkToGivenDirection(map, currentTown, direction, nameOfTownToLink);
         }
     }
 
@@ -60,12 +55,7 @@ public class TownMapCreator {
         return line.split(regex);
     }
 
-    private Town createNewTownIfDoesNotExist(String name, ConcurrentMap<Town, ConcurrentMap<Directions, Town>> map) {
-        Optional<Town> townInstance = map.keySet().stream().filter(town -> town.getName().equals(name)).findFirst();
-        return townInstance.orElseGet(() -> townFactory.create(name));
-    }
-
-    private void placeCurrentTownToMap(ConcurrentMap<Town, ConcurrentMap<Directions, Town>> map, Town currentTown) {
+    private void placeCurrentTownToMap(ConcurrentMap<String, ConcurrentMap<Directions, String>> map, String currentTown) {
         map.put(currentTown, townDirectionsMapFactory.create());
     }
 
@@ -83,20 +73,15 @@ public class TownMapCreator {
         return splitLineToTokens(token, EQUALS_SEPARATOR)[1];
     }
 
-    private Town getTownToLink(String nameOfTownToLink, ConcurrentMap<Town, ConcurrentMap<Directions, Town>> map) {
-        Optional<Town> townInstance = map.keySet().stream().filter(town -> town.getName().equals(nameOfTownToLink)).findFirst();
-        return townInstance.orElseGet(() -> townFactory.create(nameOfTownToLink));
-    }
-
     private String getTownNameFromTokens(final String[] tokens) {
         return tokens[0];
     }
 
-    private void addLinkedTownToMapIfNeeded(ConcurrentMap<Town, ConcurrentMap<Directions, Town>> map, Town townToLink) {
+    private void addLinkedTownToMapIfNeeded(ConcurrentMap<String, ConcurrentMap<Directions, String>> map, String townToLink) {
         map.computeIfAbsent(townToLink, k -> townDirectionsMapFactory.create());
     }
 
-    private void putTownToLinkToGivenDirection(ConcurrentMap<Town, ConcurrentMap<Directions, Town>> map, Town currentTown, String direction, Town townToLink) {
+    private void putTownToLinkToGivenDirection(ConcurrentMap<String, ConcurrentMap<Directions, String>> map, String currentTown, String direction, String townToLink) {
         map.get(currentTown).put(getTownDirection(direction), townToLink);
     }
 

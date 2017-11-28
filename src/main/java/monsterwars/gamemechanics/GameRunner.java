@@ -6,7 +6,6 @@ import monsterwars.gamemechanics.calculator.MovementCalculator;
 import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterLocations;
 import monsterwars.worldmap.WorldMap;
-import monsterwars.worldmap.data.Town;
 
 import java.util.List;
 
@@ -44,7 +43,7 @@ public class GameRunner {
 
     }
 
-    private void fightMonstersInTown(WorldMap worldMap, MonsterLocations monsterLocations, Town town) {
+    private void fightMonstersInTown(WorldMap worldMap, MonsterLocations monsterLocations, String town) {
         monsterLocations.setMonstersListToTown(town, monsterFightCalculator.calculate(town, worldMap, monsterLocations));
     }
 
@@ -52,7 +51,7 @@ public class GameRunner {
         return monsterLocations.getTowns().stream().mapToInt(town -> monsterLocations.getListOfMonsters(town).size()).sum() >= 2;
     }
 
-    private void moveMonsterToANewTown(WorldMap worldMap, MonsterLocations monsterLocations, Town town, List<Monster> monstersInTown) {
+    private void moveMonsterToANewTown(WorldMap worldMap, MonsterLocations monsterLocations, String town, List<Monster> monstersInTown) {
         if (isOneMonsterInTown(monstersInTown)) {
             movementCalculator.moveMonster(monstersInTown.get(0), town, worldMap.getMap().get(town), monsterLocations);
         }

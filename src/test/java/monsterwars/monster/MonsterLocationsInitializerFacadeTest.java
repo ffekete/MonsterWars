@@ -3,7 +3,6 @@ package monsterwars.monster;
 import monsterwars.monster.deployer.MonsterDeployer;
 import monsterwars.monster.factory.LocationsFactory;
 import monsterwars.monster.initializer.LocationsInitializer;
-import monsterwars.worldmap.data.Town;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
 import org.testng.annotations.BeforeClass;
@@ -44,11 +43,11 @@ public class MonsterLocationsInitializerFacadeTest {
     @Test
     public void testInitShouldCallAllMethodsAndCreateMonstersLocations() {
         // GIVEN
-        ConcurrentMap<Town, List<Monster>> locations = new ConcurrentHashMap<>();
-        Town townA = new Town(TOWN_A_NAME);
-        Town townB = new Town(TOWN_B_NAME);
-        Town townC = new Town(TOWN_C_NAME);
-        Set<Town> towns = new TreeSet<>(Arrays.asList(townA, townB, townC));
+        ConcurrentMap<String, List<Monster>> locations = new ConcurrentHashMap<>();
+        String townA =TOWN_A_NAME;
+        String townB = TOWN_B_NAME;
+        String townC = TOWN_C_NAME;
+        Set<String> towns = new TreeSet<>(Arrays.asList(townA, townB, townC));
         expect(locationsFactory.create()).andReturn(locations);
         locationsInitializer.initialize(anyObject(), anyObject());
         monsterDeployer.deployAll(anyObject(), anyObject());

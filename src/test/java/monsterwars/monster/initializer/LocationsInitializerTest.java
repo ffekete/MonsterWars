@@ -2,7 +2,6 @@ package monsterwars.monster.initializer;
 
 import monsterwars.monster.MonsterLocations;
 import monsterwars.monster.factory.MonsterListFactory;
-import monsterwars.worldmap.data.Town;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
 import org.testng.annotations.BeforeClass;
@@ -42,10 +41,10 @@ public class LocationsInitializerTest {
     public void testShouldInitializeMapWithEmptyListOfMonstersForAllTowns() {
         // GIVEN
         MonsterLocations monsterLocations = new MonsterLocations(new ConcurrentHashMap<>());
-        Town townA = new Town(TOWN_A_NAME);
-        Town townB = new Town(TOWN_B_NAME);
-        Town townC = new Town(TOWN_C_NAME);
-        Set<Town> towns = new TreeSet<>(Arrays.asList(townA, townB, townC));
+        String townA = TOWN_A_NAME;
+        String townB = TOWN_B_NAME;
+        String townC = TOWN_C_NAME;
+        Set<String> towns = new TreeSet<>(Arrays.asList(townA, townB, townC));
         expect(monsterListFactory.createEmpty()).andReturn(Collections.emptyList()).times(NUMBER_OF_TOWNS);
         control.replay();
         // WHEN

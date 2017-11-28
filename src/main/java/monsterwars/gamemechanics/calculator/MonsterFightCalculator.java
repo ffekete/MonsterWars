@@ -5,7 +5,6 @@ import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterLocations;
 import monsterwars.monster.factory.MonsterListFactory;
 import monsterwars.worldmap.WorldMap;
-import monsterwars.worldmap.data.Town;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class MonsterFightCalculator {
      * @param monsterLocations to remove monsters as well.
      * @return list of monsters after the fight calculation in the town.
      */
-    public List<Monster> calculate(Town town, WorldMap worldMap, MonsterLocations monsterLocations) {
+    public List<Monster> calculate(String town, WorldMap worldMap, MonsterLocations monsterLocations) {
         List<Monster> monsters = monsterLocations.getListOfMonsters(town);
         if (areThereMoreMonstersInThisTown(monsters)) {
             printMonsterFightMessage(town, monsters);
@@ -43,12 +42,12 @@ public class MonsterFightCalculator {
         return monsterListFactory.createEmpty();
     }
 
-    private void destroyTown(Town town, WorldMap worldMap) {
+    private void destroyTown(String town, WorldMap worldMap) {
         worldMap.removeTownFromWorldMap(town);
     }
 
-    private void printMonsterFightMessage(Town town, List<Monster> monsters) {
-        System.out.print(town.getName() + " has been destroyed by ");
+    private void printMonsterFightMessage(String town, List<Monster> monsters) {
+        System.out.print(town + " has been destroyed by ");
         for (int i = 0; i < monsters.size(); i++) {
             System.out.print(monsters.get(i).getName());
             if (i != monsters.size() - 1) System.out.print(" and ");

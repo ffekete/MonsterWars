@@ -3,7 +3,7 @@ package monsterwars.monster.strategy;
 import java.util.Random;
 
 /**
- * Selects a random {@link monsterwars.worldmap.data.Town}.
+ * Selects a random index.
  */
 public class RandomMonsterPlacementStrategy implements MonsterPlacementStrategy {
 

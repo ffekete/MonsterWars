@@ -14,12 +14,12 @@ public class WorldMapDecorator {
     }
 
     /**
-     * Prints the remaining {@link monsterwars.worldmap.data.Town}s in the world.
+     * Prints the remaining towns in the world.
      */
     public void printRemainingWorldMap() {
         worldMap.getMap().keySet().forEach(town -> {
-            System.out.print(town.getName() + " ");
-            worldMap.getMap().get(town).forEach((directions, town1) -> System.out.print(directions.getName() + ": " + town1.getName() + " "));
+            System.out.print(town + " ");
+            worldMap.getMap().get(town).forEach((directions, town1) -> System.out.print(directions.getName() + ": " + town1 + " "));
             System.out.println("");
         });
     }

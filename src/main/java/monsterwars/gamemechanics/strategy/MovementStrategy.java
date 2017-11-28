@@ -1,7 +1,6 @@
 package monsterwars.gamemechanics.strategy;
 
 import monsterwars.worldmap.data.Directions;
-import monsterwars.worldmap.data.Town;
 
 import java.util.Map;
 
@@ -16,5 +15,5 @@ public interface MovementStrategy {
      * @param possibleDirections all possible directions.
      * @return one direction form the list.
      */
-    Directions getDirection(Map<Directions, Town> possibleDirections);
+    Directions getDirection(Map<Directions, String> possibleDirections);
 }

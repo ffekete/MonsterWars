@@ -1,8 +1,7 @@
 package monsterwars.monster.strategy;
 
 /**
- * Strategy for placing {@link monsterwars.monster.Monster} instances on {@link monsterwars.monster.MonsterLocations}.
- * Selects an index related to a {@link monsterwars.worldmap.data.Town}.
+ * Selects an index.
  */
 public interface MonsterPlacementStrategy {
 

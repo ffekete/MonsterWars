@@ -5,7 +5,6 @@ import monsterwars.gamemechanics.strategy.MovementStrategy;
 import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterLocations;
 import monsterwars.worldmap.data.Directions;
-import monsterwars.worldmap.data.Town;
 
 import java.util.Map;
 
@@ -29,7 +28,7 @@ public class MovementCalculator {
      * @param possibleDirections where can the monster move?
      * @param monsterLocations   Storage where towns are linked with monsters.
      */
-    public void moveMonster(Monster monster, Town actualTown, Map<Directions, Town> possibleDirections, MonsterLocations monsterLocations) {
+    public void moveMonster(Monster monster, String actualTown, Map<Directions, String> possibleDirections, MonsterLocations monsterLocations) {
         Directions directionToMove = getRandomDirectionToMove(possibleDirections);
         if (directionToMove != null) {
             monsterLocations.addMonsterToTown(getDestinationTown(possibleDirections, directionToMove), monster);
@@ -37,11 +36,11 @@ public class MovementCalculator {
         }
     }
 
-    private Town getDestinationTown(Map<Directions, Town> possibleDirections, Directions directionToMove) {
+    private String getDestinationTown(Map<Directions, String> possibleDirections, Directions directionToMove) {
         return possibleDirections.get(directionToMove);
     }
 
-    private Directions getRandomDirectionToMove(Map<Directions, Town> possibleDirections) {
+    private Directions getRandomDirectionToMove(Map<Directions, String> possibleDirections) {
         return movementStrategy.getDirection(possibleDirections);
     }
 }

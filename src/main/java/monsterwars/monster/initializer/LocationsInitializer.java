@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterLocations;
 import monsterwars.monster.factory.MonsterListFactory;
-import monsterwars.worldmap.data.Town;
 
 import java.util.List;
 import java.util.Set;
@@ -27,7 +26,7 @@ public class LocationsInitializer {
      * @param locations to initialize.
      * @param towns     set of towns where monsters may roam.
      */
-    public void initialize(MonsterLocations locations, final Set<Town> towns) {
+    public void initialize(MonsterLocations locations, final Set<String> towns) {
         towns.forEach(town -> locations.setMonstersListToTown(town, getEmptyListOfMonsters()));
     }
 

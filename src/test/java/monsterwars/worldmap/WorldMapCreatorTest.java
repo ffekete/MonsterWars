@@ -2,7 +2,6 @@ package monsterwars.worldmap;
 
 import monsterwars.worldmap.creator.TownMapCreator;
 import monsterwars.worldmap.data.Directions;
-import monsterwars.worldmap.data.Town;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
 import org.testng.annotations.BeforeClass;
@@ -35,7 +34,7 @@ public class WorldMapCreatorTest {
     @Test
     public void testBuildShouldBuildWorldMap() {
         // GIVEN
-        ConcurrentMap<Town, ConcurrentMap<Directions, Town>> emptyMap = new ConcurrentHashMap<>();
+        ConcurrentMap<String, ConcurrentMap<Directions, String>> emptyMap = new ConcurrentHashMap<>();
         Set<String> rawData = new TreeSet<>();
         expect(townMapCreator.createFrom(rawData)).andReturn(emptyMap);
         control.replay();

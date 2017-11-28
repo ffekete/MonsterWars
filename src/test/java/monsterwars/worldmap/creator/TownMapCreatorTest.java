@@ -1,10 +1,8 @@
 package monsterwars.worldmap.creator;
 
 import monsterwars.worldmap.data.Directions;
-import monsterwars.worldmap.data.Town;
 import monsterwars.worldmap.factory.RawMapFactory;
 import monsterwars.worldmap.factory.TownDirectionsMapFactory;
-import monsterwars.worldmap.factory.TownFactory;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
 import org.testng.annotations.BeforeClass;
@@ -24,12 +22,10 @@ public class TownMapCreatorTest {
     private final IMocksControl control = EasyMock.createControl();
 
     private TownMapCreator underTest;
-    private TownFactory townFactory;
 
     @BeforeClass
     public void setUp() {
-        townFactory = control.createMock(TownFactory.class);
-        underTest = new TownMapCreator(new RawMapFactory(), new TownDirectionsMapFactory(), townFactory);
+        underTest = new TownMapCreator(new RawMapFactory(), new TownDirectionsMapFactory());
     }
 
     @BeforeMethod
@@ -44,15 +40,12 @@ public class TownMapCreatorTest {
         rawData.add("A north=B south=C");
         rawData.add("C north=A");
         rawData.add("B south=A");
-        Town townA = new Town("A");
-        Town townB = new Town("B");
-        Town townC = new Town("C");
-        expect(townFactory.create("A")).andReturn(townA);
-        expect(townFactory.create("B")).andReturn(townB);
-        expect(townFactory.create("C")).andReturn(townC);
+        String townA = "A";
+        String townB = "B";
+        String townC = "C";
         control.replay();
         //WHEN
-        ConcurrentMap<Town, ConcurrentMap<Directions, Town>> map = underTest.createFrom(rawData);
+        ConcurrentMap<String, ConcurrentMap<Directions, String>> map = underTest.createFrom(rawData);
         // THEN
         control.verify();
         assertEquals(map.get(townA).get(Directions.NORTH), townB);
@@ -67,15 +60,12 @@ public class TownMapCreatorTest {
         rawMap.add("A north=B south=C");
         rawMap.add("C");
         rawMap.add("B");
-        Town townA = new Town("A");
-        Town townB = new Town("B");
-        Town townC = new Town("C");
-        expect(townFactory.create("A")).andReturn(townA);
-        expect(townFactory.create("B")).andReturn(townB);
-        expect(townFactory.create("C")).andReturn(townC);
+        String townA = "A";
+        String townB = "B";
+        String townC = "C";
         control.replay();
         //WHEN
-        ConcurrentMap<Town, ConcurrentMap<Directions, Town>> map = underTest.createFrom(rawMap);
+        ConcurrentMap<String, ConcurrentMap<Directions, String>> map = underTest.createFrom(rawMap);
         // THEN
         control.verify();
         assertEquals(map.get(townA).get(Directions.NORTH), townB);

@@ -2,7 +2,6 @@ package monsterwars.monster.factory;
 
 
 import monsterwars.monster.Monster;
-import monsterwars.worldmap.data.Town;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,7 +17,7 @@ public class LocationsFactory {
      *
      * @return created instance.
      */
-    public ConcurrentMap<Town, List<Monster>> create() {
+    public ConcurrentMap<String, List<Monster>> create() {
         return new ConcurrentHashMap<>();
     }
 }

@@ -4,7 +4,6 @@ import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterLocations;
 import monsterwars.monster.factory.MonsterListFactory;
 import monsterwars.worldmap.WorldMap;
-import monsterwars.worldmap.data.Town;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
 import org.testng.annotations.BeforeClass;
@@ -54,8 +53,8 @@ public class MonsterFightCalculatorTest {
         Monster monster1 = new Monster(MONSTER_1_NAME);
         Monster monster2 = new Monster(MONSTER_2_NAME);
         Monster monster3 = new Monster(MONSTER_3_NAME);
-        ConcurrentMap<Town, List<Monster>> map = new ConcurrentHashMap<>();
-        Town townA = new Town(TOWN_A_NAME);
+        ConcurrentMap<String, List<Monster>> map = new ConcurrentHashMap<>();
+        String townA = TOWN_A_NAME;
         map.put(townA, Arrays.asList(monster1, monster2, monster3));
         WorldMap worldMap = control.createMock(WorldMap.class);
         worldMap.removeTownFromWorldMap(townA);
@@ -73,8 +72,8 @@ public class MonsterFightCalculatorTest {
     public void testCalculateShouldReturnWithTheInputListWhenLessThanTwoMonstersAreInTheList(Monster monster) {
         // GIVEN
         List<Monster> listOfMonsters = Collections.singletonList(monster);
-        Town townA = new Town(TOWN_A_NAME);
-        ConcurrentMap<Town, List<Monster>> map = new ConcurrentHashMap<>();
+        String townA = TOWN_A_NAME;
+        ConcurrentMap<String, List<Monster>> map = new ConcurrentHashMap<>();
         map.put(townA, listOfMonsters);
         WorldMap worldMap = control.createMock(WorldMap.class);
         expect(worldMap.getMap()).andReturn(new ConcurrentHashMap<>());

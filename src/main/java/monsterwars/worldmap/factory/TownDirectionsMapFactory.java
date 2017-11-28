@@ -1,7 +1,6 @@
 package monsterwars.worldmap.factory;
 
 import monsterwars.worldmap.data.Directions;
-import monsterwars.worldmap.data.Town;
 
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentSkipListMap;
@@ -16,7 +15,7 @@ public class TownDirectionsMapFactory {
      *
      * @return created map.
      */
-    public ConcurrentMap<Directions, Town> create() {
+    public ConcurrentMap<Directions, String> create() {
         return new ConcurrentSkipListMap<>();
     }
 }
