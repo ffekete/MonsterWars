@@ -5,6 +5,7 @@ import monsterwars.worldmap.data.Town;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 /**
  * Creates a {@link ConcurrentMap} instance for {@link monsterwars.worldmap.creator.TownMapCreator}.
@@ -17,6 +18,6 @@ public class RawMapFactory {
      * @return created map.
      */
     public ConcurrentMap<Town, ConcurrentMap<Directions, Town>> create() {
-        return new ConcurrentHashMap<>();
+        return new ConcurrentSkipListMap<>();
     }
 }
