@@ -13,7 +13,6 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentMap;
 
-import static org.easymock.EasyMock.expect;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNull;
 

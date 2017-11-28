@@ -13,7 +13,7 @@ public class RandomMovementStrategy implements MovementStrategy {
 
     @Override
     public Directions getDirection(Map<Directions, String> possibleDirections) {
-        if(possibleDirections.size() > 0) {
+        if (possibleDirections.size() > 0) {
             int index = getRandomIndex(possibleDirections);
             return getDirection(possibleDirections, index);
         } else {
