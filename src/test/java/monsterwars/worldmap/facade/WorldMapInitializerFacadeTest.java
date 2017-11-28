@@ -2,7 +2,7 @@ package monsterwars.worldmap.facade;
 
 import monsterwars.worldmap.inverter.DirectionsInverter;
 import monsterwars.worldmap.WorldMap;
-import monsterwars.worldmap.WorldMapCreator;
+import monsterwars.worldmap.creator.WorldMapCreator;
 import monsterwars.worldmap.reader.WorldMapFileReader;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;

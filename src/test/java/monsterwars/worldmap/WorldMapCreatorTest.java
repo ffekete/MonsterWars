@@ -1,6 +1,7 @@
 package monsterwars.worldmap;
 
 import monsterwars.worldmap.creator.TownMapCreator;
+import monsterwars.worldmap.creator.WorldMapCreator;
 import monsterwars.worldmap.data.Directions;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;

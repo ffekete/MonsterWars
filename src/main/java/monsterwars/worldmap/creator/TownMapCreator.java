@@ -5,7 +5,6 @@ import monsterwars.worldmap.data.Directions;
 import monsterwars.worldmap.factory.RawMapFactory;
 import monsterwars.worldmap.factory.TownDirectionsMapFactory;
 
-import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
@@ -41,12 +40,12 @@ public class TownMapCreator {
     private void fillMap(ConcurrentMap<String, ConcurrentMap<Directions, String>> map, String line) {
         String[] tokens = splitLineToTokens(line, SPACE_SEPARATOR);
         String currentTown = getTownNameFromTokens(tokens);
-        placeCurrentTownToMap(map, currentTown);
+        addTownToMapIfNeeded(map, currentTown);
         for (int i = 1; i < tokens.length; i++) {
             validateToken(tokens[i]);
             String direction = getDirectionFromCurrentToken(tokens[i]);
             String nameOfTownToLink = getTownNameFromCurrentToken(tokens[i]);
-            addLinkedTownToMapIfNeeded(map, nameOfTownToLink);
+            addTownToMapIfNeeded(map, nameOfTownToLink);
             putTownToLinkToGivenDirection(map, currentTown, direction, nameOfTownToLink);
         }
     }
@@ -55,8 +54,8 @@ public class TownMapCreator {
         return line.split(regex);
     }
 
-    private void placeCurrentTownToMap(ConcurrentMap<String, ConcurrentMap<Directions, String>> map, String currentTown) {
-        map.put(currentTown, townDirectionsMapFactory.create());
+    private String getTownNameFromTokens(final String[] tokens) {
+        return tokens[0];
     }
 
     private void validateToken(String token) {
@@ -73,11 +72,7 @@ public class TownMapCreator {
         return splitLineToTokens(token, EQUALS_SEPARATOR)[1];
     }
 
-    private String getTownNameFromTokens(final String[] tokens) {
-        return tokens[0];
-    }
-
-    private void addLinkedTownToMapIfNeeded(ConcurrentMap<String, ConcurrentMap<Directions, String>> map, String townToLink) {
+    private void addTownToMapIfNeeded(ConcurrentMap<String, ConcurrentMap<Directions, String>> map, String townToLink) {
         map.computeIfAbsent(townToLink, k -> townDirectionsMapFactory.create());
     }
 

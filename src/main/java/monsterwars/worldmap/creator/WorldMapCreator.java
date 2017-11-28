@@ -1,7 +1,7 @@
-package monsterwars.worldmap;
+package monsterwars.worldmap.creator;
 
 import com.google.inject.Inject;
-import monsterwars.worldmap.creator.TownMapCreator;
+import monsterwars.worldmap.WorldMap;
 import monsterwars.worldmap.inverter.DirectionsInverter;
 
 import java.util.Set;

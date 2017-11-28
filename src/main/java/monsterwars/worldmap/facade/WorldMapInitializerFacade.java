@@ -2,7 +2,7 @@ package monsterwars.worldmap.facade;
 
 import com.google.inject.Inject;
 import monsterwars.worldmap.WorldMap;
-import monsterwars.worldmap.WorldMapCreator;
+import monsterwars.worldmap.creator.WorldMapCreator;
 import monsterwars.worldmap.reader.WorldMapFileReader;
 
 import java.io.IOException;
