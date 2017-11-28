@@ -24,6 +24,11 @@ import static org.easymock.EasyMock.expect;
  */
 public class GameRunnerTest {
 
+    private static final String TOWN_A_NAME = "A";
+    private static final String TOWN_B_NAME = "B";
+    private static final String MONSTER_A_NAME = "A";
+    private static final String MONSTER_C_NAME = "B";
+    private static final String MONSTER_B_NAME = "C";
     private final IMocksControl control = EasyMock.createControl();
 
     private MonsterFightCalculator monsterFightCalculator;
@@ -40,12 +45,12 @@ public class GameRunnerTest {
     @Test
     public void testRunWithShouldRunGameAndCallCalculators() {
         // GIVEN
-        Town townA = new Town("A");
-        Town townB = new Town("B");
+        Town townA = new Town(TOWN_A_NAME);
+        Town townB = new Town(TOWN_B_NAME);
         WorldMap worldMap = new WorldMap(new ConcurrentHashMap<>());
-        Monster monsterA = new Monster("A");
-        Monster monsterB = new Monster("B");
-        Monster monsterC = new Monster("C");
+        Monster monsterA = new Monster(MONSTER_A_NAME);
+        Monster monsterB = new Monster(MONSTER_B_NAME);
+        Monster monsterC = new Monster(MONSTER_C_NAME);
         ConcurrentMap<Town, List<Monster>> monstersList = new ConcurrentHashMap<>();
         monstersList.put(townA, Collections.singletonList(monsterA));
         monstersList.put(townB, Arrays.asList(monsterB, monsterC));

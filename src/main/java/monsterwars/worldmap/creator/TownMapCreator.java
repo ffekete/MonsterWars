@@ -47,29 +47,13 @@ public class TownMapCreator {
         Town currentTown = createNewTownIfDoesNotExist(getTownNameFromTokens(tokens), map);
         placeCurrentTownToMap(map, currentTown);
         for (int i = 1; i < tokens.length; i++) {
+            validateToken(tokens[i]);
             String direction = getDirectionFromCurrentToken(tokens[i]);
             String nameOfTownToLink = getTownNameFromCurrentToken(tokens[i]);
             Town townToLink = getTownToLink(nameOfTownToLink, map);
             addLinkedTownToMapIfNeeded(map, townToLink);
             putTownToLinkToGivenDirection(map, currentTown, direction, townToLink);
         }
-    }
-
-    private String getTownNameFromTokens(final String[] tokens) {
-        return tokens[0];
-    }
-
-    private void putTownToLinkToGivenDirection(ConcurrentMap<Town, ConcurrentMap<Directions, Town>> map, Town currentTown, String direction, Town townToLink) {
-        map.get(currentTown).put(getTownDirection(direction), townToLink);
-    }
-
-    private void addLinkedTownToMapIfNeeded(ConcurrentMap<Town, ConcurrentMap<Directions, Town>> map, Town townToLink) {
-        map.computeIfAbsent(townToLink, k -> townDirectionsMapFactory.create());
-    }
-
-    private Town getTownToLink(String nameOfTownToLink, ConcurrentMap<Town, ConcurrentMap<Directions, Town>> map) {
-        Optional<Town> townInstance = map.keySet().stream().filter(town -> town.getName().equals(nameOfTownToLink)).findFirst();
-        return townInstance.orElseGet(() -> townFactory.create(nameOfTownToLink));
     }
 
     private String[] splitLineToTokens(final String line, final String regex) {
@@ -85,12 +69,35 @@ public class TownMapCreator {
         map.put(currentTown, townDirectionsMapFactory.create());
     }
 
+    private void validateToken(String token) {
+        if (!token.contains(EQUALS_SEPARATOR)) {
+            throw new IllegalArgumentException("Cannot split token " + token + ", it should be '[direction]=[townname]'.");
+        }
+    }
+
     private String getDirectionFromCurrentToken(final String token) {
         return splitLineToTokens(token, EQUALS_SEPARATOR)[0];
     }
 
     private String getTownNameFromCurrentToken(final String token) {
         return splitLineToTokens(token, EQUALS_SEPARATOR)[1];
+    }
+
+    private Town getTownToLink(String nameOfTownToLink, ConcurrentMap<Town, ConcurrentMap<Directions, Town>> map) {
+        Optional<Town> townInstance = map.keySet().stream().filter(town -> town.getName().equals(nameOfTownToLink)).findFirst();
+        return townInstance.orElseGet(() -> townFactory.create(nameOfTownToLink));
+    }
+
+    private String getTownNameFromTokens(final String[] tokens) {
+        return tokens[0];
+    }
+
+    private void addLinkedTownToMapIfNeeded(ConcurrentMap<Town, ConcurrentMap<Directions, Town>> map, Town townToLink) {
+        map.computeIfAbsent(townToLink, k -> townDirectionsMapFactory.create());
+    }
+
+    private void putTownToLinkToGivenDirection(ConcurrentMap<Town, ConcurrentMap<Directions, Town>> map, Town currentTown, String direction, Town townToLink) {
+        map.get(currentTown).put(getTownDirection(direction), townToLink);
     }
 
     private Directions getTownDirection(final String direction) {
