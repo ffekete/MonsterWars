@@ -18,7 +18,7 @@ public class MonsterLocations {
         return locations.get(town);
     }
 
-    public void addMonstersToTown(Town town, List<Monster> monsters) {
+    public void setMonstersListToTown(Town town, List<Monster> monsters) {
         locations.put(town, monsters);
     }
 

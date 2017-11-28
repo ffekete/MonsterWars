@@ -10,6 +10,9 @@ import monsterwars.worldmap.data.Town;
 
 import java.util.List;
 
+/**
+ * Runs game rules.
+ */
 public class GameRunner {
 
     private static final int MAX_NUMBER_OF_STEPS = 10000;
@@ -33,20 +36,17 @@ public class GameRunner {
         int i;
         for (i = 0; i < MAX_NUMBER_OF_STEPS && areThereMonstersStillAlive(monsterLocations); i++) {
             monsterLocations.getTowns().forEach(town -> {
-                List<Monster> newListOfMonstersInTown = fightMonstersInTown(worldMap, monsterLocations, town);
-                processListOfMonstersInTown(monsterLocations, town, newListOfMonstersInTown);
-                if (isOneMonsterInTown(newListOfMonstersInTown))
-                    moveThatMonsterToANewTown(worldMap, monsterLocations, town, newListOfMonstersInTown);
+                fightMonstersInTown(worldMap, monsterLocations, town);
+                List<Monster> monstersInTown = monsterLocations.getListOfMonsters(town);
+                if (isOneMonsterInTown(monstersInTown)) {
+                    moveThatMonsterToANewTown(worldMap, monsterLocations, town, monstersInTown);
+                }
             });
         }
     }
 
-    private void processListOfMonstersInTown(MonsterLocations monsterLocations, Town town, List<Monster> newList) {
-        monsterLocations.addMonstersToTown(town, newList);
-    }
-
-    private List<Monster> fightMonstersInTown(WorldMap worldMap, MonsterLocations monsterLocations, Town town) {
-        return monsterFightCalculator.calculate(town, worldMap, monsterLocations);
+    private void fightMonstersInTown(WorldMap worldMap, MonsterLocations monsterLocations, Town town) {
+        monsterLocations.setMonstersListToTown(town, monsterFightCalculator.calculate(town, worldMap, monsterLocations));
     }
 
     private boolean areThereMonstersStillAlive(MonsterLocations monsterLocations) {
@@ -57,7 +57,7 @@ public class GameRunner {
         movementCalculator.moveMonster(newList.get(0), town, worldMap.getMap().get(town), monsterLocations);
     }
 
-    private boolean isOneMonsterInTown(List<Monster> newList) {
-        return newList.size() == 1;
+    private boolean isOneMonsterInTown(List<Monster> monsters) {
+        return monsters.size() == 1;
     }
 }

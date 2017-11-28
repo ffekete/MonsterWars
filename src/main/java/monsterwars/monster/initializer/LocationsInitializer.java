@@ -21,7 +21,7 @@ public class LocationsInitializer {
     }
 
     public void initialize(MonsterLocations locations, final Set<Town> towns) {
-        towns.forEach(town -> locations.addMonstersToTown(town, getEmptyListOfMonsters()));
+        towns.forEach(town -> locations.setMonstersListToTown(town, getEmptyListOfMonsters()));
     }
 
     private List<Monster> getEmptyListOfMonsters() {
