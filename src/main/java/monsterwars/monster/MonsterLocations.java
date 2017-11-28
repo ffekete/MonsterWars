@@ -34,4 +34,8 @@ public class MonsterLocations {
     public Set<String> getTowns() {
         return locations.keySet();
     }
+
+    public ConcurrentMap<String, List<Monster>> getLocations() {
+        return locations;
+    }
 }
