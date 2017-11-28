@@ -28,7 +28,7 @@ public class MonsterFightCalculatorTest {
     private static final String MONSTER_3_NAME = "3";
     private static final String TOWN_A_NAME = "a";
 
-    private final IMocksControl control = EasyMock.createControl();
+    private final IMocksControl control = EasyMock.createStrictControl();
 
     private MonsterListFactory monsterListFactory;
     private MonsterFightCalculator underTest;
@@ -51,13 +51,12 @@ public class MonsterFightCalculatorTest {
         Monster monster1 = new Monster(MONSTER_1_NAME);
         Monster monster2 = new Monster(MONSTER_2_NAME);
         Monster monster3 = new Monster(MONSTER_3_NAME);
-        expect(monsterListFactory.createEmpty()).andReturn(emptyList);
         ConcurrentMap<Town, List<Monster>> map = new ConcurrentHashMap<>();
         Town townA = new Town(TOWN_A_NAME);
         map.put(townA, Arrays.asList(monster1, monster2, monster3));
         WorldMap worldMap = control.createMock(WorldMap.class);
-        expect(worldMap.getMap()).andReturn(new ConcurrentHashMap<>());
         worldMap.removeTownFromWorldMap(townA);
+        expect(monsterListFactory.createEmpty()).andReturn(emptyList);
         EasyMock.expectLastCall();
         control.replay();
         // WHEN
