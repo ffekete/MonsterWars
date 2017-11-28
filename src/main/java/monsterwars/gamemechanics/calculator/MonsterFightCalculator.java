@@ -9,6 +9,9 @@ import monsterwars.worldmap.data.Town;
 
 import java.util.List;
 
+/**
+ * Calculates the aftermath of monsters fight.
+ */
 public class MonsterFightCalculator {
 
     private final MonsterListFactory monsterListFactory;
@@ -18,6 +21,14 @@ public class MonsterFightCalculator {
         this.monsterListFactory = monsterListFactory;
     }
 
+    /**
+     * Destroys town and monsters during a fight.
+     *
+     * @param town             to destroy.
+     * @param worldMap         to remove town from the map.
+     * @param monsterLocations to remove monsters as well.
+     * @return list of monsters after the fight calculation in the town.
+     */
     public List<Monster> calculate(Town town, WorldMap worldMap, MonsterLocations monsterLocations) {
         List<Monster> monsters = monsterLocations.getListOfMonsters(town);
         if (areThereMoreMonstersInThisTown(monsters)) {

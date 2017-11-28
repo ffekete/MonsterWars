@@ -21,6 +21,9 @@ import java.util.concurrent.ConcurrentMap;
 import static org.easymock.EasyMock.expect;
 import static org.testng.Assert.assertTrue;
 
+/**
+ * Unit tests for {@link MonsterFightCalculator}.
+ */
 public class MonsterFightCalculatorTest {
 
     private static final String MONSTER_1_NAME = "1";
