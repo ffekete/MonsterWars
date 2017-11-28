@@ -48,7 +48,7 @@ public class LocationsInitializerTest {
         underTest.initialize(monsterLocations, towns);
         // THEN
         control.verify();
-        long nrOfEmptyTowns = monsterLocations.getTowns().stream().filter(town -> monsterLocations.getListOfMonsters(town).isEmpty()).count();
+        long nrOfEmptyTowns = monsterLocations.getTowns().parallelStream().filter(town -> monsterLocations.getListOfMonsters(town).isEmpty()).count();
         assertEquals(nrOfEmptyTowns, NUMBER_OF_TOWNS);
     }
 }

@@ -28,9 +28,8 @@ public class WorldMap {
      * @param town to remove.
      */
     public void removeTownFromWorldMap(String town) {
-        map.get(town).keySet().forEach(direction -> {
-            String actualTownInDirection = map.get(town).get(direction);
-            if (actualTownInDirection != null) map.get(actualTownInDirection).remove(directionsInverter.get(direction));
+        map.get(town).forEach((direction, townInDirection) -> {
+            map.get(townInDirection).remove(directionsInverter.get(direction));
         });
         map.remove(town);
     }

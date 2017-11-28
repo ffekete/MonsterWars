@@ -47,7 +47,7 @@ public class GameRunner {
     }
 
     private boolean areThereMonstersStillAlive(MonsterLocations monsterLocations) {
-        return monsterLocations.getTowns().stream().mapToInt(town -> monsterLocations.getListOfMonsters(town).size()).sum() >= 2;
+        return monsterLocations.getTowns().parallelStream().mapToInt(town -> monsterLocations.getListOfMonsters(town).size()).sum() >= 2;
     }
 
     private void moveMonsterToANewTown(WorldMap worldMap, MonsterLocations monsterLocations, String town, List<Monster> monstersInTown) {
