@@ -2,6 +2,7 @@ package monsterwars.main;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import monsterwars.gamemechanics.GameMechanicsModule;
 import monsterwars.gamemechanics.GameRunner;
 import monsterwars.monster.MonsterLocations;
 import monsterwars.monster.MonsterLocationsInitializerFacade;
@@ -25,7 +26,7 @@ public class Main {
             Long numberOfMonsters = validateInputAndGetValue(args);
             if (numberOfMonsters != null && numberOfMonsters > 0) {
                 // Initializing Environment
-                Injector injector = Guice.createInjector(new MonsterModule());
+                Injector injector = Guice.createInjector(new MonsterModule(), new GameMechanicsModule());
                 WorldMapInitializerFacade worldMapInitializerFacade = injector.getInstance(WorldMapInitializerFacade.class);
                 MonsterLocationsInitializerFacade monsterLocationsInitializerFacade = injector.getInstance(MonsterLocationsInitializerFacade.class);
                 GameRunner gameRunner = injector.getInstance(GameRunner.class);

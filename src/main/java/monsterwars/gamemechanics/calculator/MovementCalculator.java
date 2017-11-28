@@ -1,5 +1,7 @@
 package monsterwars.gamemechanics.calculator;
 
+import com.google.inject.Inject;
+import monsterwars.gamemechanics.strategy.MovementStrategy;
 import monsterwars.monster.Monster;
 import monsterwars.monster.MonsterLocations;
 import monsterwars.worldmap.data.Directions;
@@ -14,6 +16,13 @@ import java.util.Set;
  * Calculates {@link Monster} movements on map.
  */
 public class MovementCalculator {
+
+    private final MovementStrategy movementStrategy;
+
+    @Inject
+    public MovementCalculator(final MovementStrategy movementStrategy) {
+        this.movementStrategy = movementStrategy;
+    }
 
     /**
      * Moves one monster on the map.
@@ -34,14 +43,6 @@ public class MovementCalculator {
     }
 
     private Directions getRandomDirectionToMove(Map<Directions, Town> possibleDirections) {
-        return new ArrayList<>(getPossibleDirections(possibleDirections)).get(getRandomIndex(possibleDirections));
-    }
-
-    private Set<Directions> getPossibleDirections(Map<Directions, Town> possibleDirections) {
-        return possibleDirections.keySet();
-    }
-
-    private int getRandomIndex(Map<Directions, Town> possibleDirections) {
-        return new Random().nextInt(getPossibleDirections(possibleDirections).size());
+        return movementStrategy.getDirection(possibleDirections);
     }
 }
